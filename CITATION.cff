@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use Swarm in your research, please cite it."
+title: "Swarm: open problems from recent papers, verified verbatim"
+abstract: >-
+  Swarm reads the most relevant recent arXiv papers on a question in parallel with NVIDIA Nemotron, extracts the
+  problems their authors say are unsolved, keeps only quotes found word for word in the paper, and ranks problems by
+  how many independent author groups raise them.
+authors:
+  - family-names: Patel
+    given-names: Nancy
+repository-code: "https://github.com/nancypatel12/swarm"
+license: MIT
+version: "1.0.0"
+keywords:
+  - open problems
+  - literature review
+  - arXiv
+  - Nemotron

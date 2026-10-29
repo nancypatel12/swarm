@@ -1,0 +1,474 @@
+{
+  "date": "2026-10-29",
+  "run_id": "d9517b532bd8",
+  "input": "Do AI labelers grade decisions or outcomes? rlhf and rlaif",
+  "verdict": "First run with the rule that one paper can't fill the list; arXiv's API answered again. 80 papers, 78 in full, 175 of 193 quotes kept (91%), 44 s. The rule worked: no paper backs more than one problem, and every first step names a real paper. But only 4 problems remained, each from one group, and one (KV cache memory in RL rollouts) is off the question. The answer was direct: AI labelers in RLAIF mostly grade final outcomes, and outcome-only training can still induce step-level checking. Not used as the example: the seventh run stays, because all six of its problems bear on the question, even though four come from one paper.",
+  "stats": {
+    "seconds": 43.8,
+    "papers": 80,
+    "full_text": 78,
+    "quotes_proposed": 193,
+    "quotes_kept": 175,
+    "tokens": 116924,
+    "calls": {
+      "super": 88,
+      "ultra": 2
+    }
+  },
+  "search": "Searching arXiv for “RLHF RLAIF comparison”, “reward model grading decisions”, “RLHF”, “RLAIF”, “process supervision”",
+  "field": "AI alignment through human feedback",
+  "terms": [
+    {
+      "term": "RLHF",
+      "meaning": "Reinforcement Learning from Human Feedback trains models using rewards learned from human judgments"
+    },
+    {
+      "term": "RLAIF",
+      "meaning": "Reinforcement Learning from AI Feedback uses AI-generated preferences instead of human ones to train models"
+    },
+    {
+      "term": "process supervision",
+      "meaning": "Training models by giving feedback on intermediate reasoning steps rather than just final answers"
+    },
+    {
+      "term": "outcome supervision",
+      "meaning": "Training models by giving feedback only on final results or decisions"
+    },
+    {
+      "term": "reward modeling",
+      "meaning": "Building a model that predicts human preferences to guide AI training"
+    }
+  ],
+  "answer": {
+    "type": "answer",
+    "sentences": [
+      {
+        "text": "In RLAIF, AI labelers such as LLM-based auto-raters and judges typically grade final outcomes, for example, answer correctness or response quality on a discrete rubric, rather than intermediate decisions [2605.12667, 2608.17776].",
+        "papers": [
+          "2605.12667",
+          "2608.17776"
+        ]
+      },
+      {
+        "text": "Outcome-only RL frameworks like TIPS explicitly optimize using only outcome labels (whether the final answer matches ground truth), reinforcing step-level verification indirectly [2609.36641].",
+        "papers": [
+          "2609.36641"
+        ]
+      },
+      {
+        "text": "RLHF traditionally learns a reward model from human preferences over whole responses, so the effective grading is also at the outcome level, though the preferences themselves may reflect decision-quality judgments [2609.12651].",
+        "papers": [
+          "2609.12651"
+        ]
+      },
+      {
+        "text": "One paper describes specialized decision models that output calibrated verdicts (e.g., severity grades) for security tasks, showing AI labelers can grade decisions in narrow domains, but this is not the standard RLHF/RLAIF paradigm [2609.28940].",
+        "papers": [
+          "2609.28940"
+        ]
+      }
+    ],
+    "read_first": [
+      {
+        "paper_id": "2605.12667",
+        "why": "Describes auto-raters in RLAIF grading responses with discrete rewards"
+      },
+      {
+        "paper_id": "2608.17776",
+        "why": "Shows LLM judge grading final-answer correctness in debate-based RLAIF"
+      },
+      {
+        "paper_id": "2609.36641",
+        "why": "Introduces outcome-only RL where reward depends solely on outcome match"
+      },
+      {
+        "paper_id": "2609.28940",
+        "why": "Mentions decision models that grade verdicts in a security context"
+      },
+      {
+        "paper_id": "2609.12651",
+        "why": "Analyzes RLHF reward learning from human preference data over responses"
+      }
+    ]
+  },
+  "problems": [
+    {
+      "title": "Debate accuracy plateaus and causes are not understood",
+      "groups": 1,
+      "statements": [
+        "And understanding why debate accuracy plateaus rather than continuing toward the RLVR roofline, and how to overcome this, could unlock further gains."
+      ],
+      "papers": [
+        "2608.17776"
+      ],
+      "explanation": "Debate training lets models critique each other to reduce reward hacking, but the accuracy gains stop climbing before they reach the theoretical RLVR roofline. No one yet knows why the curve flattens, so we cannot tell if the limit is fundamental or just a missing trick. Figuring that out would show whether more scale, a better reward model, or a new debate format can push performance further.",
+      "first_step": "Reproduce the core debate-training loop from \"Debate Training Reduces Reward Hacking in RLAIF\" on a tiny dialogue task (for example, a 2-turn debate on a synthetic preference dataset) and plot accuracy versus training steps to see where the plateau appears.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Reward model misspecification and lack of robustness to distribution shifts remain unaddressed",
+      "groups": 1,
+      "statements": [
+        "it does not correct reward model misspecification, nor does it guarantee robustness under arbitrary preference shifts or adversarial prompts."
+      ],
+      "papers": [
+        "2607.18258"
+      ],
+      "explanation": "Current preference-based RLHF can still learn a misspecified reward model, and it offers no guarantee when user preferences shift or an adversary crafts tricky prompts. The paper introduces a hierarchical credit-assignment scheme meant to stabilize learning, but its robustness to arbitrary distribution shifts has not been tested. Solving this would make alignment hold up in the wild, not just on the training distribution.",
+      "first_step": "Implement the hierarchical credit-assignment module from \"S2T-RLHF: Hierarchical Credit Assignment for Stable Preference-Based RLHF\" on a small reward-modeling benchmark (such as a bandit with known misspecification) and measure how often the learned reward diverges from the true one.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Risk of advantage flipping in non-monotonic reward decompositions",
+      "groups": 1,
+      "statements": [
+        "alternative discrete representations, such as bitwise decomposition, could theoretically compress the reward space. However, such non-monotonic representations risk introducing complex failure modes, such as advantage flipping, where lower true rewards inadvertently receive higher accumulated advantages due to bit-level misalignments."
+      ],
+      "papers": [
+        "2605.12667"
+      ],
+      "explanation": "Bitwise or other non-monotonic reward decompositions can compress the reward space, but they risk advantage flipping: a lower true reward gets a higher accumulated advantage because individual bits misalign. The paper proposes ordinal decompositions to avoid this, yet the failure modes of non-monotonic schemes are not fully mapped. Understanding the boundary would tell us when compression is safe and when it silently corrupts optimization.",
+      "first_step": "Code a toy reward function, apply both a bitwise decomposition and the ordinal decomposition from \"ODRPO: Ordinal Decompositions of Discrete Rewards for Robust Policy Optimization\", then compare the accumulated advantages to spot any advantage-flipping events.",
+      "needs": "a laptop",
+      "addressed": null
+    },
+    {
+      "title": "Memory overhead during rollout remains prohibitive for long contexts",
+      "groups": 1,
+      "statements": [
+        "However, for long-context reasoning tasks, this rollout phase imposes a severe ``memory wall'' due to the exorbitant Key-Value (KV) cache footprint."
+      ],
+      "papers": [
+        "2605.06850"
+      ],
+      "explanation": "During RL post-training rollouts, the Key-Value (KV) cache grows with context length and creates a memory wall that blocks long-context reasoning. The paper introduces shadow mask distillation to compress that cache, but the practical memory savings at different context lengths need verification. Cracking this wall would let a single GPU train on much longer sequences.",
+      "first_step": "Run the KV-cache measurement script from \"How to Compress KV Cache in RL Post-Training? Shadow Mask Distillation for Memory-Efficient Alignment\" on a small model (for example, a 125M parameter transformer) across context lengths of 1k, 4k, and 16k tokens, logging peak GPU memory with and without the shadow mask.",
+      "needs": "one GPU",
+      "addressed": null
+    }
+  ],
+  "papers": [
+    {
+      "id": "2609.12651",
+      "title": "Distortion of AI Alignment Revisited: RLHF is a Decent Utilitarian Aligner"
+    },
+    {
+      "id": "2608.17776",
+      "title": "Debate Training Reduces Reward Hacking in RLAIF"
+    },
+    {
+      "id": "2609.09928",
+      "title": "Structural Process Supervision for Latent Chain-of-Thought Reasoning"
+    },
+    {
+      "id": "2607.18258",
+      "title": "S2T-RLHF: Hierarchical Credit Assignment for Stable Preference-Based RLHF"
+    },
+    {
+      "id": "2605.12667",
+      "title": "ODRPO: Ordinal Decompositions of Discrete Rewards for Robust Policy Optimization"
+    },
+    {
+      "id": "2610.29498",
+      "title": "A Strong MoE Is All You Need for Process Supervision"
+    },
+    {
+      "id": "2608.10126",
+      "title": "Procedural Fairness Failures in RLHF from Preference Averaging"
+    },
+    {
+      "id": "2605.06850",
+      "title": "How to Compress KV Cache in RL Post-Training? Shadow Mask Distillation for Memory-Efficient Alignment"
+    },
+    {
+      "id": "2609.36641",
+      "title": "Inducing Process Supervision from Outcome-Only Reinforcement Learning"
+    },
+    {
+      "id": "2607.07693",
+      "title": "Selective Timestep Weighting and Advantage-Based Replay for Sample-Efficient Diffusion RLHF"
+    },
+    {
+      "id": "2610.17306",
+      "title": "Calibrating LLM Explanations to Human Decisions with Reinforcement Learning"
+    },
+    {
+      "id": "2609.26399",
+      "title": "Combining Hierarchical Cognitive Process with Process Supervision for Interpretable Scene Safety Understanding"
+    },
+    {
+      "id": "2606.03238",
+      "title": "When RLHF Fails: A Mechanistic Taxonomy of Reward Hacking, Collapse, and Evaluator Gaming"
+    },
+    {
+      "id": "2609.28940",
+      "title": "Calibrated Decision Models for Autonomous Penetration-Testing Harnesses: JEV and Laya as System One Decision Layers for LLM-Driven Pentest Agents"
+    },
+    {
+      "id": "2609.00833",
+      "title": "Dense Process Supervision for Search Agents via Fact Utility Estimation"
+    },
+    {
+      "id": "2606.29758",
+      "title": "PS-PPO: Prefix-Sampling PPO for Critic-Free RLHF"
+    },
+    {
+      "id": "2606.27291",
+      "title": "Designing Reward Signals for Portable Query Generation: A Case Study in Industrial Semantic Job Search"
+    },
+    {
+      "id": "2609.11176",
+      "title": "Debate-to-Skill: Capability-Bound Process Supervision for Industrial Query-to-Agent Annotation"
+    },
+    {
+      "id": "2605.06977",
+      "title": "$f$-Divergence Regularized RLHF: Two Tales of Sampling and Unified Analyses"
+    },
+    {
+      "id": "2610.03025",
+      "title": "Verifiable, Articulable, and Tacit Components of Preference"
+    },
+    {
+      "id": "2608.30461",
+      "title": "From Final Artifacts to Trajectories: Retrospective Process Supervision for Evidence-Grounded Long-Form Generation"
+    },
+    {
+      "id": "2606.09073",
+      "title": "A Unifying Lens on Reward Uncertainty in RLHF"
+    },
+    {
+      "id": "2609.34374",
+      "title": "ABC-Align: Prediction-Powered Alignment with Adaptive Bias Control"
+    },
+    {
+      "id": "2610.19695",
+      "title": "C3: Rethinking Process Supervision via Confidence-Guided Credit Correction in Multi-Turn Reinforcement Learning"
+    },
+    {
+      "id": "2606.04145",
+      "title": "EvalStop: Using World Feedback to Detect and Correct Reward Overoptimization in Multi-Tenant RLHF Platforms"
+    },
+    {
+      "id": "2607.07993",
+      "title": "Hallucination Self-Play: Bootstrapping Reinforced Detector via Evolved Generator"
+    },
+    {
+      "id": "2606.29296",
+      "title": "Process Advantage Signal Shaping: Advantage Construction for Process-Supervised Reinforcement Learning in LLM Reasoners"
+    },
+    {
+      "id": "2605.23945",
+      "title": "Accelerating Long-Tail Generation in Synchronous RLHF Training via Adaptive Tensor Parallelism"
+    },
+    {
+      "id": "2610.12707",
+      "title": "Unsupervised Multimodal Reward Modeling"
+    },
+    {
+      "id": "2605.29568",
+      "title": "DeepTool: Scaling Interleaved Deliberation in Tool-Integrated Reasoning via Process-Supervised Reinforcement Learning"
+    },
+    {
+      "id": "2605.04266",
+      "title": "Explaining and Preventing Alignment Collapse in Iterative RLHF"
+    },
+    {
+      "id": "2606.03327",
+      "title": "CAPER: Clause-Aligned Process Supervision for Text-to-SQL"
+    },
+    {
+      "id": "2605.20834",
+      "title": "Conditional Equivalence of DPO and RLHF: Implicit Assumption, Failure Modes, and Provable Alignment"
+    },
+    {
+      "id": "2606.27154",
+      "title": "OpenRCA 2.0: From Outcome Labels to Causal Process Supervision"
+    },
+    {
+      "id": "2606.27578",
+      "title": "PEBS: Per-rater Empirical-Bayes Shrinkage for RLHF Reward-Model Calibration"
+    },
+    {
+      "id": "2608.23632",
+      "title": "Function-Level Execution Feedback for Code Preference Optimization"
+    },
+    {
+      "id": "2607.19712",
+      "title": "How Fast Can Reward Models Score? A Systems Study of C++ and PyTorch Inference Runtimes for RLHF"
+    },
+    {
+      "id": "2609.34660",
+      "title": "Rewarding Novel Deductions: Solver-guided Process Supervision for Logical Reasoning"
+    },
+    {
+      "id": "2606.19818",
+      "title": "Uncertainty-Aware Reward Modeling for Stable RLHF"
+    },
+    {
+      "id": "2610.17697",
+      "title": "LeanPRM: Lean-Grounded Process Supervision for Natural Language Proof Verification"
+    },
+    {
+      "id": "2610.21138",
+      "title": "CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF"
+    },
+    {
+      "id": "2609.22746",
+      "title": "ProcessLight: Process Supervision for Large Language Model Based Traffic Signal Control"
+    },
+    {
+      "id": "2605.02495",
+      "title": "Efficient Preference Poisoning Attack on Offline RLHF"
+    },
+    {
+      "id": "2608.31077",
+      "title": "Reconciling Process Supervision with Outcome-Based Credit in Agentic Policy Optimization"
+    },
+    {
+      "id": "2605.06895",
+      "title": "Mitigating Cognitive Bias in RLHF by Altering Rationality"
+    },
+    {
+      "id": "2605.21996",
+      "title": "From Patches to Trajectories: Privileged Process Supervision for Software-Engineering Agents"
+    },
+    {
+      "id": "2607.11434",
+      "title": "Direct Image-to-Modern Vietnamese Translation of Han-Nom Manuscripts via Multimodal RLHF Preference Alignment"
+    },
+    {
+      "id": "2607.01050",
+      "title": "GeoSearcher: Anchor-Guided Progressive Reasoning for Remote Sensing Visual Grounding with Process Supervision"
+    },
+    {
+      "id": "2605.12112",
+      "title": "When Policy Entropy Constraint Fails: Preserving Diversity in Flow-based RLHF via Perceptual Entropy"
+    },
+    {
+      "id": "2609.32631",
+      "title": "SWE-MILE: Asynchronous Potential-Induced Milestone Credit Assignment for Long-Horizon Software Engineering Agents"
+    },
+    {
+      "id": "2606.27580",
+      "title": "Retroactive Advantage Correction: Closed-Form V-Trace Bias Correction for Delay-Aware RLHF"
+    },
+    {
+      "id": "2610.16587",
+      "title": "Code-Interactive Visual Reasoning for Financial Candlestick Understanding"
+    },
+    {
+      "id": "2605.12991",
+      "title": "Not Just RLHF: Why Alignment Alone Won't Fix Multi-Agent Sycophancy"
+    },
+    {
+      "id": "2605.29648",
+      "title": "Beyond Math and Code: Lightweight Corpus-Grounded Process Rewards for Factual Question Answering"
+    },
+    {
+      "id": "2605.01771",
+      "title": "The Compliance Gap: Why AI Systems Promise to Follow Process Instructions but Don't"
+    },
+    {
+      "id": "2607.13501",
+      "title": "LOTAPO: Leave-One-Turn Attribution for Self-Generated Process Rewards in Multi-Turn Search Reasoning"
+    },
+    {
+      "id": "2605.27355",
+      "title": "Alignment Tampering: How Reinforcement Learning from Human Feedback Is Exploited to Optimize Misaligned Biases"
+    },
+    {
+      "id": "2606.16215",
+      "title": "PACT: Privileged Trace Co-Training for Multi-Turn Tool-Use Agents"
+    },
+    {
+      "id": "2605.15464",
+      "title": "Where and What to Reward? Understanding Generalization Between Verifiable and Open-Ended Domains in Reinforcement Learning"
+    },
+    {
+      "id": "2609.34296",
+      "title": "Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents"
+    },
+    {
+      "id": "2609.38938",
+      "title": "Robust Risk-Sensitive Reinforcement Learning from Corrupted Human Feedback"
+    },
+    {
+      "id": "2605.30838",
+      "title": "COMPASS: Cognitive MCTS-Guided Process Alignment for Safe Search Agents"
+    },
+    {
+      "id": "2610.09891",
+      "title": "A Scoping Review and Experimental Study on Reinforcement Learning from Human Feedback for Human-Robot Collaboration"
+    },
+    {
+      "id": "2605.02395",
+      "title": "Verifiable Counterfactual Supervision for Process Reward Models"
+    },
+    {
+      "id": "2609.33221",
+      "title": "RMB: Reward Model Boosting Mitigates Reward Hacking"
+    },
+    {
+      "id": "2605.19538",
+      "title": "CaptchaMind: Training CAPTCHA Solvers via Reinforcement Learning with Explicit Reasoning Supervision"
+    },
+    {
+      "id": "2609.08064",
+      "title": "Risk-Conditioned Fine-Tuning of Large Language Models"
+    },
+    {
+      "id": "2608.30051",
+      "title": "Mitigating Over-Optimization in PRM-Guided Search in Mathematical Reasoning by Optimizing the Guide"
+    },
+    {
+      "id": "2608.24988",
+      "title": "Does Fine-Tuning Undo Activation Steering? Behavioural Recovery Without Weight-Edit Reversal"
+    },
+    {
+      "id": "2607.10144",
+      "title": "IdeaTrail: Full-Process Agent Trajectories for Scientific Ideation"
+    },
+    {
+      "id": "2606.22652",
+      "title": "A Markov Chain Approach to Preference Alignment"
+    },
+    {
+      "id": "2610.23234",
+      "title": "MultiAgent-OPD: End-to-End Training of Hierarchical Multi-Agent Systems with On-Policy Distillation"
+    },
+    {
+      "id": "2606.08940",
+      "title": "Multilingual Sentiment Aware Text Summarization A Reinforcement Learning Approach for Consistency Maintenance"
+    },
+    {
+      "id": "2608.30841",
+      "title": "HSRM: Hidden-State Reward Models for Test-Time Verification"
+    },
+    {
+      "id": "2608.15530",
+      "title": "Why Summaries Turn Neutral: Policy Attribution for Sentiment Drift in Reinforcement Learning from Human Feedback"
+    },
+    {
+      "id": "2609.16076",
+      "title": "The Imitation Game: When LLMs Learn to Reason Like Programs via Code-Centric Reasoning Data Synthesis"
+    },
+    {
+      "id": "2608.27505",
+      "title": "A Survey on Rubric-Guided Reinforcement Learning for Language Models"
+    },
+    {
+      "id": "2605.30912",
+      "title": "Attend to Evidence: Evidence-Anchored Spatial Attention Supervision for Multimodal RLVR"
+    },
+    {
+      "id": "2606.00291",
+      "title": "The Representation-Rationalizability Tradeoff in Reward Learning"
+    },
+    {
+      "id": "2609.37190",
+      "title": "HaPRL: Human-Anchored Process Reinforcement Learning for Visual Search Agent"
+    }
+  ]
+}

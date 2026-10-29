@@ -1,0 +1,376 @@
+{
+  "date": "2026-10-28",
+  "run_id": "487a0e63f9a6",
+  "input": "Do AI labelers grade decisions or outcomes? rlhf and rlaif",
+  "verdict": "Ran end to end but failed the checks: grouping made three catch-all categories (one covering 52 papers) from generic limits like 'only tested on one model', and the searches drifted to 'constitutional AI' and 'reasoning steps'. Fixed afterwards: extraction skips generic limits, grouping must be specific and sees the question, groups over 12 statements are dropped, searches use only the terms found. Not yet run again.",
+  "stats": {
+    "seconds": 78.4,
+    "papers": 80,
+    "full_text": 78,
+    "quotes_proposed": 236,
+    "quotes_kept": 220,
+    "tokens": 110985,
+    "calls": {
+      "super": 93,
+      "ultra": 1
+    }
+  },
+  "search": "Searching arXiv for \u201creward model\u201d, \u201cconstitutional AI\u201d, \u201creasoning steps\u201d",
+  "field": "AI alignment via preference learning",
+  "terms": [
+    {
+      "term": "Reinforcement Learning from Human Feedback (RLHF)",
+      "meaning": "A method where human preferences over model outputs are used to train a reward model that guides reinforcement learning."
+    },
+    {
+      "term": "Process Supervision",
+      "meaning": "Training a model to evaluate intermediate reasoning steps rather than just final outcomes, improving reliability and interpretability."
+    },
+    {
+      "term": "Preference Learning",
+      "meaning": "The general task of learning a ranking or scoring function from pairwise or ranked comparisons of outputs, often used to align models with human values."
+    }
+  ],
+  "problems": [
+    {
+      "title": "Reward modeling and preference learning limitations",
+      "groups": 51,
+      "statements": 140,
+      "explanation": "Current reward models in preference learning don't directly penalize physical violations like objects passing through each other, and they only detect reward hacking after it appears in the model's outputs, not before. This matters because if a robot learns to exploit the reward without actually solving the task safely, it could cause real-world damage. Researchers also want to find early signs of hacking inside the model's internal representations to prevent it proactively."
+    },
+    {
+      "title": "Limited generalizability and scalability of methods",
+      "groups": 13,
+      "statements": 17,
+      "explanation": "The reported results come from fine-tuning two models developed by the same lab, so it's unclear if the findings apply to models from other sources or to domains beyond robotics. The framework's utility labels are created once and may become inaccurate as the model continues learning. This matters because a method that only works for one lab's models or one domain isn't a general solution for AI alignment."
+    },
+    {
+      "title": "Need for broader evaluation across models, datasets, and tasks",
+      "groups": 11,
+      "statements": 19,
+      "explanation": "So far, improvements from reward modeling have only been shown for one specific model (DreamDojo-2B) in one environment (AgiBotWorld), and evaluations focus on English retrieval tasks. Clean feedback data for noise estimation can be expensive, and there's no validation on web search, multilingual tasks, or generation. This matters because we don't know if these methods scale to larger models, different tasks like math or code, or work without costly human annotations."
+    }
+  ],
+  "papers": [
+    {
+      "id": "2610.34221",
+      "title": "CropReward: A Human-Preference Benchmark and Reward Model for Aesthetic Image Cropping"
+    },
+    {
+      "id": "2610.34537",
+      "title": "STEP: Soft Trajectory Estimation of Prediction Correctness via Per-Step Probability Scoring"
+    },
+    {
+      "id": "2610.34005",
+      "title": "Steering the Teacher: Improving On-Policy Self-Distillation for Thinking Models"
+    },
+    {
+      "id": "2610.32222",
+      "title": "ACWM-RM: A Reference-Free Reward Model from Complementary Mismatch Preferences"
+    },
+    {
+      "id": "2610.32772",
+      "title": "Direction-Aware Token Credit Assignment with Reward-Model Gradients"
+    },
+    {
+      "id": "2610.33368",
+      "title": "Multiple Importance Sampling for Guided Speculative Inference"
+    },
+    {
+      "id": "2610.30765",
+      "title": "Scaling Laws for Generative Reward Models"
+    },
+    {
+      "id": "2610.30690",
+      "title": "From Clinical Judgment to Checkable Rules: Clinician-Led Guardrails for Mental-Health Chatbots"
+    },
+    {
+      "id": "2610.31089",
+      "title": "Transformers with CoT Discover Heavy-Ball Acceleration Through Training"
+    },
+    {
+      "id": "2610.31639",
+      "title": "Causal Chain of Thought: Mitigating Attention Leakage via Context Isolation"
+    },
+    {
+      "id": "2610.29518",
+      "title": "Mitigating Query Shortcuts in Chain-of-Thought with Context-Aware Decoding"
+    },
+    {
+      "id": "2610.26496",
+      "title": "Mitigating Reward Hacking in Preference Reward Models with Evolving Penalties"
+    },
+    {
+      "id": "2610.25298",
+      "title": "Aligning Language Models with Indigenous Community Cosmovision through Constitutional AI"
+    },
+    {
+      "id": "2610.25441",
+      "title": "Stepwise Reasoning Verification: Don't Generate, Classify!"
+    },
+    {
+      "id": "2610.23550",
+      "title": "Reason-guided Human Reward Modeling for Preference-based Reinforcement Learning"
+    },
+    {
+      "id": "2610.22805",
+      "title": "Compression Precedes, Content Decides: Emergent Misalignment in Reward Models"
+    },
+    {
+      "id": "2610.23167",
+      "title": "LongForge: Measuring and Improving Long-Context Instruction Data via Evidence-Assertion Reasoning Graphs"
+    },
+    {
+      "id": "2610.22056",
+      "title": "Progress Reward Model for Reinforcement Learning via Large Language Models"
+    },
+    {
+      "id": "2610.21138",
+      "title": "CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF"
+    },
+    {
+      "id": "2610.22665",
+      "title": "Diverse Reasoning Paths Matter: Symbolic Equivalence Augmentation for Enhancing RL Exploration"
+    },
+    {
+      "id": "2610.21182",
+      "title": "Does Latent Chain-of-Thought Actually Reason? A Single, Unifying Taxonomy for Latent Reasoning"
+    },
+    {
+      "id": "2610.21030",
+      "title": "Learning When to Think: Utility-Guided Adaptive Reasoning for Efficient Text Retrieval"
+    },
+    {
+      "id": "2610.19832",
+      "title": "Rent-Seeking Language Models: Reward Models Set the Prices, Frequent Audits Curb the Rent"
+    },
+    {
+      "id": "2610.20292",
+      "title": "Taking the PULSE of Medical Reasoning: Step-Level Retrieval Timing for Knowledge-Grounded Inference"
+    },
+    {
+      "id": "2610.18299",
+      "title": "LegalRewardBench: Benchmarking Reward Models for Legal Preference Evaluation"
+    },
+    {
+      "id": "2610.17544",
+      "title": "Many Steps into One: Reasoning Contraction and the Limits of Safe Memory Reuse for LLM Agents"
+    },
+    {
+      "id": "2610.17234",
+      "title": "IsoVRBench: Video Reward Modeling Without Human Feedback"
+    },
+    {
+      "id": "2610.12707",
+      "title": "Unsupervised Multimodal Reward Modeling"
+    },
+    {
+      "id": "2610.09746",
+      "title": "Flow-of-Thought: A Framework for Visual Reasoning"
+    },
+    {
+      "id": "2610.07935",
+      "title": "SIGMA: Self-Improving Alignment Generalization from a Model Spec"
+    },
+    {
+      "id": "2610.05976",
+      "title": "Can Language Models Learn to Reject Their Own Bad Reasoning Steps?"
+    },
+    {
+      "id": "2610.06404",
+      "title": "Quantifying the Stability of Multi-Step Reasoning via Error Amplification"
+    },
+    {
+      "id": "2610.06328",
+      "title": "What Did the AI Take On? Characterizing Cognitive Delegation in LLM Reasoning"
+    },
+    {
+      "id": "2610.05370",
+      "title": "EnGRICH: Enhancing Generative Reward Modeling with Critiques from Humans"
+    },
+    {
+      "id": "2610.02947",
+      "title": "FARM: Fundamental Agentic Reward Model For Multi-task Wireless Network Optimization"
+    },
+    {
+      "id": "2609.37372",
+      "title": "Think Before You Score: Thinking Reward Model for Visual Generation"
+    },
+    {
+      "id": "2609.36245",
+      "title": "CoRe: Co-Evolving Reward Models for Mitigating Latent Reward Hacking in Video Diffusion Models"
+    },
+    {
+      "id": "2609.34345",
+      "title": "CRISP: Cultural Reward Modeling for Implicit Situated Propriety"
+    },
+    {
+      "id": "2609.35109",
+      "title": "Using Context Is Not Enough: Test-Time Training for Personalized Reward Modeling"
+    },
+    {
+      "id": "2609.34181",
+      "title": "Efficient Reasoning via Constrained Optimization in Latent Space"
+    },
+    {
+      "id": "2609.34660",
+      "title": "Rewarding Novel Deductions: Solver-guided Process Supervision for Logical Reasoning"
+    },
+    {
+      "id": "2609.33221",
+      "title": "RMB: Reward Model Boosting Mitigates Reward Hacking"
+    },
+    {
+      "id": "2609.33989",
+      "title": "RewardExplainer: Learning Reward Model Explanations from Counterfactual Preference Feedback"
+    },
+    {
+      "id": "2609.33803",
+      "title": "Diffusion Reward Models"
+    },
+    {
+      "id": "2609.33778",
+      "title": "Evidence-Inference Reconstruction: When The Evidence Is Recalled But The Reasoning Goes Wrong"
+    },
+    {
+      "id": "2609.32720",
+      "title": "BiasReducer: Adaptive Bias Mitigation for Reward Models"
+    },
+    {
+      "id": "2609.32674",
+      "title": "Expected Reasoning-Step Return Unifies On-Policy Learning from Rewards and Teachers"
+    },
+    {
+      "id": "2609.27038",
+      "title": "Are Stated Reasoning Steps Causally Load-Bearing?"
+    },
+    {
+      "id": "2609.22947",
+      "title": "RewardVerse: Rubric-Guided Policy Optimization for Video Reward Modeling"
+    },
+    {
+      "id": "2609.21231",
+      "title": "Beyond Reference-Based Evaluation: Reward Models for Meta-Evaluation of Grammatical Error Correction"
+    },
+    {
+      "id": "2609.22347",
+      "title": "Verification Reward Model for Reinforcement Learning in Chip Design Verification"
+    },
+    {
+      "id": "2609.20106",
+      "title": "AnyviewMeter: Adapting Robotic Reward Models with Camera Geometry and Multi-View Attention"
+    },
+    {
+      "id": "2609.19878",
+      "title": "Uni-LaDiR: Latent Diffusion Unifies Multimodal Reasoning"
+    },
+    {
+      "id": "2609.18057",
+      "title": "Anchoring What Matters: A Dual-Level Learning Framework for Visually-Grounded Multimodal Reasoning"
+    },
+    {
+      "id": "2609.14226",
+      "title": "Corpus Characterization and Inverse Constitutional Fine-Tuning for Style-Aware Radiology Reports"
+    },
+    {
+      "id": "2609.05910",
+      "title": "UniRRM: Unified Reasoning Reward Models Across Languages and Evaluation Paradigms"
+    },
+    {
+      "id": "2609.05028",
+      "title": "Compositional Reward Models for Conditional Medical Image Generation"
+    },
+    {
+      "id": "2609.05090",
+      "title": "Constructing and Evaluating Clinical Reasoning Trajectories for Medical Agent"
+    },
+    {
+      "id": "2609.03952",
+      "title": "WorldReward: Reward Modeling for Camera-Conditioned World Models"
+    },
+    {
+      "id": "2609.04194",
+      "title": "Legibility is Not Interpretability: Comparing Judged and Actual Importance in Chain-Of-Thought Reasoning"
+    },
+    {
+      "id": "2609.02336",
+      "title": "SALA: Semantic-Aware Logical Alignment for Complex Reasoning in In-Context Learning"
+    },
+    {
+      "id": "2609.00699",
+      "title": "Patterning in Practice: Debiasing Reward Models with Susceptibilities"
+    },
+    {
+      "id": "2609.01023",
+      "title": "AKRASIA: Stealthy Backdoor Attack on Reasoning-based Code LLMs"
+    },
+    {
+      "id": "2608.30841",
+      "title": "HSRM: Hidden-State Reward Models for Test-Time Verification"
+    },
+    {
+      "id": "2608.30679",
+      "title": "LCoT-GV: Graph Attention Networks for Verifying Long Reasoning Chains in Large Language Models"
+    },
+    {
+      "id": "2608.31069",
+      "title": "A Model with No Head and Many Thoughts"
+    },
+    {
+      "id": "2608.26956",
+      "title": "RubricRM: Generative Reward Modeling via Dynamic Rubrics for Image Generation and Editing"
+    },
+    {
+      "id": "2608.27505",
+      "title": "A Survey on Rubric-Guided Reinforcement Learning for Language Models"
+    },
+    {
+      "id": "2609.22158",
+      "title": "StepKV: Step-Aware KV Cache Compression for LLM Agents"
+    },
+    {
+      "id": "2608.25139",
+      "title": "Path Abstraction for Markov Reward Models"
+    },
+    {
+      "id": "2608.23205",
+      "title": "Cognitive Profiling of LRMs' Reasoning Traces Using Bloom's Taxonomy"
+    },
+    {
+      "id": "2608.21860",
+      "title": "ChainPrune: Evaluating and Reducing Redundancy in Long Chain-of-Thought Reasoning"
+    },
+    {
+      "id": "2608.21863",
+      "title": "HiDiffTIR: Hierarchical Difficulty-Aware Policy Optimization for Multi-Turn Tool-Integrated Reasoning"
+    },
+    {
+      "id": "2608.19408",
+      "title": "Beyond Imitation: Filtering On-Policy Distillation by Reasoning Progress"
+    },
+    {
+      "id": "2608.16411",
+      "title": "Towards Risk-free AI Agent Deployment"
+    },
+    {
+      "id": "2608.13345",
+      "title": "Rules or Character? Scaling Laws for AI Safety Design"
+    },
+    {
+      "id": "2608.12104",
+      "title": "No One to Blame: A Framework of Constitutive AI Unaccountability"
+    },
+    {
+      "id": "2608.11905",
+      "title": "Policy-as-logic for robust reasoning over rules"
+    },
+    {
+      "id": "2608.11274",
+      "title": "Agent Safety Should Be a Runtime Contract"
+    },
+    {
+      "id": "2608.10916",
+      "title": "FaithformBench: Benchmarking Faithfulness of Mathematical Chain-of-Thought Autoformalisation"
+    }
+  ]
+}

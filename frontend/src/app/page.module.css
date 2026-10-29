@@ -1,0 +1,385 @@
+.page {
+  max-width: 728px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* A finished run widens the page for the workspace: the rail beside a 680px reading pane. */
+.wide {
+  max-width: 1104px;
+}
+
+.wide .intro {
+  max-width: 680px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 680px);
+  gap: 64px;
+  align-items: start;
+  padding-top: 48px;
+}
+
+.papers {
+  margin: 0 0 96px;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 24px 0 16px;
+  background: var(--background);
+}
+
+.home {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.name {
+  font-family: var(--name);
+  font-size: 20px;
+  perspective: 400px;
+}
+
+.share {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.share {
+  text-decoration: none;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.share:hover {
+  color: var(--ink);
+}
+
+/* System status, like an instrument's top line: whether the backend answers, and what it runs on. */
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 20px;
+  margin: 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+
+.online,
+.offline {
+  font-weight: 600;
+}
+
+.online {
+  color: var(--accent);
+}
+
+.offline {
+  color: var(--ink);
+}
+
+.intro {
+  padding: 72px 0 64px;
+}
+
+.question {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 34px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.lead {
+  margin: 12px 0 32px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* The input as an instrument console: a labeled panel, the query, and the run control. */
+.console {
+  border: 1px solid var(--ink);
+  border-radius: 10px;
+}
+
+.consoleHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+
+.consoleHead span:last-child {
+  color: var(--muted);
+}
+
+.textarea {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 0;
+  background: var(--background);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+}
+
+.console:focus-within {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.textarea::placeholder {
+  color: var(--muted);
+}
+
+.textarea:disabled {
+  color: var(--muted);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.button {
+  flex: none;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--background);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.hint {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.error {
+  margin: 16px 0 0;
+}
+
+/* Three numbers from a real run, the way every project page in the style guide opens. */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 56px 0 0;
+  border-top: 1px solid var(--ink);
+}
+
+/* A readout: measured values in monospace, labels small beneath. */
+.numbers > div {
+  padding: 14px 16px 0 0;
+}
+
+.numbers dt {
+  font-family: var(--mono);
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.numbers dd {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.source {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.examples {
+  margin: 56px 0 0;
+}
+
+.examples ol {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.examples li {
+  display: flex;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.examples a {
+  text-decoration: none;
+}
+
+.examples a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.label {
+  margin: 0;
+  font-weight: 600;
+}
+
+.number {
+  flex: none;
+  width: 28px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Exports a researcher keeps: the report and every citation. */
+.exports {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: -24px 0 40px;
+}
+
+.exports button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.exports button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* What Swarm is doing, as a numbered log. The step it's on is in ink. */
+.steps {
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.step,
+.stepDone {
+  display: flex;
+  gap: 12px;
+  padding: 2px 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+
+.stepDone {
+  color: var(--muted);
+}
+
+.footnote {
+  margin: 64px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer {
+  padding: 96px 0 48px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 1099px) {
+  .wide {
+    max-width: 728px;
+  }
+
+  .workspace {
+    display: block;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 0 16px;
+  }
+
+  /* System status, like an instrument's top line: whether the backend answers, and what it runs on. */
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 20px;
+  margin: 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+
+.online,
+.offline {
+  font-weight: 600;
+}
+
+.online {
+  color: var(--accent);
+}
+
+.offline {
+  color: var(--ink);
+}
+
+.intro {
+    padding: 40px 0 48px;
+  }
+
+  .hint,
+  .consoleHead span:last-child {
+    display: none;
+  }
+
+  .numbers dt {
+    font-size: 20px;
+  }
+}

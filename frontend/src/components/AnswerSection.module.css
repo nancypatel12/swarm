@@ -1,0 +1,116 @@
+.answer {
+  margin: 0 0 96px;
+}
+
+.heading {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.label {
+  margin: 40px 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.terms {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.terms th,
+.terms td {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.terms tr:first-child th,
+.terms tr:first-child td {
+  border-top: 1px solid var(--line);
+}
+
+.terms th {
+  width: 36%;
+  padding-right: 24px;
+  font-weight: 600;
+}
+
+.sentence {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.cite {
+  margin-right: 12px;
+  white-space: nowrap;
+}
+
+.note,
+.why {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.read {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.read li {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.read a {
+  text-decoration: none;
+}
+
+.read a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.number {
+  flex: none;
+  width: 28px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 560px) {
+  .terms th,
+  .terms td {
+    display: block;
+    width: auto;
+    border: 0;
+    padding: 0;
+  }
+
+  .terms tr {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .terms tr:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .terms tr:first-child th,
+  .terms tr:first-child td {
+    border: 0;
+  }
+
+  .sentence {
+    font-size: 17px;
+  }
+}

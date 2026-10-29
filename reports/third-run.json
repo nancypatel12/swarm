@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-28",
+  "run_id": "b596d761cc38",
+  "input": "Do AI labelers grade decisions or outcomes? rlhf and rlaif",
+  "verdict": "Failed in 3 s: every search required all of its phrases and found nothing. Fixed afterwards: a search that finds nothing tries each phrase on its own, and the phrases are shown while searching.",
+  "wall_seconds": 2.6,
+  "events": [
+    {
+      "type": "step",
+      "id": "reader",
+      "label": "Reading what you're looking for",
+      "done": false
+    },
+    {
+      "type": "step",
+      "id": "reader",
+      "label": "Looking for open problems in AI alignment via human feedback",
+      "done": true
+    },
+    {
+      "type": "step",
+      "id": "search",
+      "label": "Searching arXiv in the field's own words",
+      "done": false
+    },
+    {
+      "type": "error",
+      "message": "Swarm found no recent papers on this. Try a broader area."
+    }
+  ]
+}

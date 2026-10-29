@@ -1,0 +1,51 @@
+.record {
+  margin: 0 0 40px;
+  border-top: 1px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+}
+
+.live {
+  color: var(--accent);
+}
+
+.state {
+  color: var(--muted);
+}
+
+.rows {
+  margin: 0;
+}
+
+.rows div {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.rows dt {
+  color: var(--muted);
+}
+
+.rows dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .rows div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

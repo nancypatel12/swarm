@@ -1,0 +1,17 @@
+.link {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .link {
+    white-space: normal;
+  }
+}

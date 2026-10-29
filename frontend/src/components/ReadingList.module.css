@@ -1,0 +1,53 @@
+.list {
+  margin: 0;
+}
+
+.list summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+/* The style guide's arrow does the job of the browser's triangle, so the triangle goes. */
+.list summary::-webkit-details-marker {
+  display: none;
+}
+
+.list summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.list ol {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.number {
+  flex: none;
+  width: 28px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.list a {
+  text-decoration: none;
+}
+
+.list a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.meta {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+}

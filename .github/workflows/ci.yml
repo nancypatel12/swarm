@@ -1,0 +1,52 @@
+# Lint, format check and tests on every push and pull request. No step calls a paid model or search.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.14"]
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -r requirements.lock
+      - run: ruff check . ../scripts
+      - run: ruff format --check . ../scripts
+      - run: python -m pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t swarm-backend backend
+      # Smoke test: the image starts on the stand-in model and answers its health check.
+      - run: |
+          docker run -d --name swarm -p 8000:8000 -e SWARM_STAND_IN=1 swarm-backend
+          for i in $(seq 1 30); do curl -sf localhost:8000/api/health && exit 0; sleep 1; done
+          docker logs swarm; exit 1

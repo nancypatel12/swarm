@@ -1,0 +1,460 @@
+{
+  "date": "2026-10-28",
+  "run_id": "7a3c686a755e",
+  "input": "Do AI labelers grade decisions or outcomes? rlhf and rlaif",
+  "verdict": "Failed: most papers were off topic. Searches used single words sorted by newest, which matched thousands of loosely related papers and returned what was posted that day. Fixed afterwards (exact phrases, last six months, sorted by relevance); not yet run again.",
+  "stats": {
+    "seconds": 71.5,
+    "papers": 80,
+    "full_text": 72,
+    "quotes_proposed": 212,
+    "quotes_kept": 189,
+    "tokens": 77617,
+    "calls": {
+      "super": 86,
+      "ultra": 1
+    }
+  },
+  "field": "AI alignment via human feedback",
+  "terms_kept": [],
+  "problems": [
+    {
+      "title": "Scaling to larger models or settings remains unverified or costly",
+      "groups": 4,
+      "papers": 4,
+      "addressed": false
+    },
+    {
+      "title": "Evaluation metrics fail to capture true functionality or validity",
+      "groups": 3,
+      "papers": 3,
+      "addressed": false
+    },
+    {
+      "title": "Limited generalizability across models, languages, or demographics",
+      "groups": 3,
+      "papers": 3,
+      "addressed": false
+    },
+    {
+      "title": "Causal relationships or effects remain unproven or confounded",
+      "groups": 3,
+      "papers": 3,
+      "addressed": false
+    },
+    {
+      "title": "Agents fail to self-verify, detect errors, or learn from long-term mistakes",
+      "groups": 3,
+      "papers": 3,
+      "addressed": false
+    },
+    {
+      "title": "Need for better experimental controls or validation protocols",
+      "groups": 3,
+      "papers": 3,
+      "addressed": false
+    }
+  ],
+  "papers": [
+    {
+      "id": "2610.37085",
+      "title": "On the Sparsity of Direct Preference Optimization: Weight Disentanglement in the NTK Regime",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36445",
+      "title": "From Solver Trajectories to Teaching Trajectories: Cognition-Aligned Reasoning Distillation",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37666",
+      "title": "ThinkWorld: World Imagination Reinforces Chain-of-Dynamics Reasoning",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37658",
+      "title": "When Should We Intervene at Test Time?",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37649",
+      "title": "Can LLMs Uncover Hidden Physical Laws through Free Exploration?",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37644",
+      "title": "Applications of the fixed point theorem for mappings contracting perimeters of triangles: ODEs, PDEs, integer and difference equations",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37613",
+      "title": "VideoLVR: Latent Visual Reasoning over Grounded Video Evidence",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37609",
+      "title": "EnvSched: Environment-Aware Scheduling for Rollout-Efficient Agent Reinforcement Learning",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37587",
+      "title": "Every route counts, but some count more: a max-plus view of the C. elegans brain",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37579",
+      "title": "As the Story Unfolds: Watching a Film and Identifying Characters as a Human Does",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37571",
+      "title": "TeamGym: A Gym for Team Decision-Making by AI Agents with Distributed Information",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37553",
+      "title": "Collective Dynamics of Self-Reinforcement: How Cross-Task Coupling Drives Policy Collapse in Unsupervised RLVR",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37547",
+      "title": "When, Where, and What to Correct: Human-Guided Adaptive Residual Correction for Robot Policies",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37529",
+      "title": "\"Helium Enrichment Law\": The Relation Between Helium and Metal Enrichment in Stars in FIRE-3 Simulations of Milky Way-mass Galaxies",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37494",
+      "title": "semanticfa: An R Package for Response-Free Semantic Factor Analysis of Psychometric Scales",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37484",
+      "title": "Teach reality, not ethics: a drop-in continued-pretraining corpus installs coupled human-biosphere-AI welfare dispositions across model families",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37471",
+      "title": "PerceptRL: Making Visual Perception Rewardable in MLLMs from Answers to Interactions",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37461",
+      "title": "Concordat: Typed Sessions for LLM Agents",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37459",
+      "title": "M4Bench: Evaluating Procedural Specification for Clinical EHR Derivation Agents",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37451",
+      "title": "Interpretable Meta-Policies for Neural Decision Making",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37448",
+      "title": "Test-Time Communication in Trading Agent Swarms",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37446",
+      "title": "PolyGandr: Steering Generative Models via Spatial Navigation through Latent Space",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37441",
+      "title": "Multi-Agent Reinforcement Learning of Co-Adaptive Hip Exoskeleton Control (MARL-Exo) for Metabolic Energy Reduction",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37435",
+      "title": "5G Sensing for Human Pose Estimation with PRS-based CSI: An Experimental Demonstration",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37434",
+      "title": "FeatureArc: Benchmarking Coding Agents on Evolving Features",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37429",
+      "title": "Bayes-Adaptive MDPs for Rollout Allocation to Enhance GRPO Training",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37427",
+      "title": "Time-Dynamic Semantic-Activity Entanglement: Quantifying Communication-Based Synchrony in Collaborative VR",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37405",
+      "title": "Clearing the FoG: Training KG Agents to Retrieve the Evidence Behind Their Answers",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37397",
+      "title": "Game-Theoretic Solvers with Bayesian Opponent Modeling and Moral Rhetoric Framing for GLEE",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37381",
+      "title": "PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37374",
+      "title": "Comparing Temporal Deep Learning Architectures for Discrete Cross-User Myoelectric Control",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37363",
+      "title": "The CGM in a New Light: Emitted H$\u03b1$, [NII], and [OIII] around Simulated Dwarf Galaxies",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37361",
+      "title": "Online Interval Selection with Binary Predictions: Optimal Consistency and a Continuous Robustness Tradeoff",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37358",
+      "title": "When Is Additional Retrieval Worthwhile? A Cost-Aware Study of Evidence Gain and Answer Reliability in RAG",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37354",
+      "title": "A New Parametric Uncertainty Approach to Systems with Time-Varying Delay and Feedback Stabilization",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37344",
+      "title": "Optimal Control of Scalar Diffusions with Finite Action Sets",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37330",
+      "title": "Tokens of Motion: Primitive Motion Learning for Human-Humanoid Skill Transfer",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37329",
+      "title": "WCC: A Learning-Based Framework for Deciding When to Apply Cooperative Coevolution in Large-Scale Optimization",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37327",
+      "title": "Local learning is all you need: brain-aligned predictive coding networks",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37323",
+      "title": "UCVE: Graph Structured Retrieval for Compliance Validation",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37307",
+      "title": "EdgePace: Deadline- and Freshness-Aware LLM Scheduling on Unified-Memory Platforms",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37281",
+      "title": "RPSD: Retrieval-Privileged On-Policy Self-Distillation with Optimal Transport",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37276",
+      "title": "Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37271",
+      "title": "An Interactive Mobile Augmented Reality System for Efficient Virtual Model-to-Patient Registration in Thoracic Surgery",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37245",
+      "title": "Aligning Large Language Models for Safety in African Languages: A Case Study of Hausa",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37228",
+      "title": "AutoRSE: Evaluating LLM Agents as Recommendation Engineers for Self-Evolving Recommender Systems",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37211",
+      "title": "Uncovering Shortcut Amplification in Video RLVR through the Lens of Perceptual Uncertainty Collapse",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37197",
+      "title": "Conditional Values: The Contingent Foundations of Attitudes toward Artificial Intelligence",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37186",
+      "title": "VGIQA: Fine-Grained Image Quality Assessment with Visual Grounding Rewards",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37181",
+      "title": "LitUbik: open-source software for human-led systematic reviews with traceable AI assistance",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37180",
+      "title": "Scaling limit and universality for one-dimensional long-range first-passage metric in the linear-growth regime",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37170",
+      "title": "From 12 to 200 Demonstrations: How ACT, Diffusion Policy, SmolVLA and $\u03c0_{0.5}$ Scale on a Low-Cost Arm",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37166",
+      "title": "LiveSearch: Questions as Executable Verifier Code for a Live Benchmark of Professional-Source Financial Search Agents",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37164",
+      "title": "Reconstructing chiral edge states via boundary dissipation",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37146",
+      "title": "Variational Optimal Control for Diffusion Guidance",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37098",
+      "title": "SplatScout: Query-Driven Part-Level Referring Segmentation in Gaussian Scenes",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37058",
+      "title": "Exploring the Limits of the Delta Learning Hypothesis: Single-Pair Generator Biases in Direct Preference Optimization",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37046",
+      "title": "Learning to Code the World: Harness Evolution for Compositional 3D Reconstruction",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37043",
+      "title": "State estimation for a hybrid rigid-continuum space manipulator system",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.37041",
+      "title": "Guided-RLVR: Guided Exploration in Reinforcement Learning with Verifiable Rewards",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36989",
+      "title": "A Serious-Game Testbed for Self-Governing Human-Machine Institutions",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36980",
+      "title": "AutoVend: Benchmarking LLM Agents on Long-Horizon Autonomous Vending Operations",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36947",
+      "title": "Beyond QASecClaw: Agent Scaling, Verifier Feedback, and Evidence Reliability in Software Assurance",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36935",
+      "title": "Gaussian Process Bandits for Constraint Black Box Lever Optimization",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36882",
+      "title": "Hyperparameter and Neural Architecture Search via Evolutionary Optimization for Reinforcement Learning: HPNAS-RL",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36849",
+      "title": "When All Rollouts Fail: Policy-Compatible Joint Decoding for Hard-Problem Reasoning",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36838",
+      "title": "MVRCap: Towards Comprehensive Video Captioning via Hierarchical Multi-Dimensional Verifiable Rewards",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36832",
+      "title": "Drop the Details, Get the Gist: Dynamic Conceptual Representation for Video Recognition",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36831",
+      "title": "Right Click, Wrong Box: Grading GUI Grounding by What a Click Does",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36823",
+      "title": "TAPESTRY: A Single Backbone for Video Generation and Robot Control",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36807",
+      "title": "SetGRPO: Calibrating Grader-Induced Policy Optimization",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36805",
+      "title": "Personality Latents: Conditioning Frozen Language Models on Individuals from Their Own Writing",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36797",
+      "title": "Language Models Keep Abandoned Analyses: Residue and Adaptation after Garden-Path Sentences",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36795",
+      "title": "An Algebra of Transformers",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36791",
+      "title": "RynnWorld-Latent: A Cross-Embodiment World Model Conditioned on Universal Latent Actions",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36776",
+      "title": "Dependency Graphs of Mathematical Arguments: Representation, Structural Measurement, and Proof Review",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36767",
+      "title": "Can LLMs Reliably Grade Olympiad Proofs? A Study of Mathematical Verification with LLMs",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36763",
+      "title": "The Vocabulary Is Already Here: Adapting Pretrained Interpretable Features for Generative Recommendation",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36761",
+      "title": "Making Self-Driving Laboratories Auditable:A Unified Framework for Hybrid Actions,Measurements, and Safe Execution",
+      "published": "2026-10-27"
+    },
+    {
+      "id": "2610.36748",
+      "title": "Axiom: a logic programming language to express and enforce network designs",
+      "published": "2026-10-27"
+    }
+  ]
+}

@@ -1,0 +1,531 @@
+{
+  "date": "2026-10-29",
+  "run_id": "eee452b1a8ac",
+  "input": "I'm a master's student with one GPU. Why do language models still make things up, and what's still hard about catching it?",
+  "verdict": "A busy field, picked so labs would agree: hallucination. 80 papers, 75 in full, 232 of 250 quotes kept (93%), 81 s. Strong cited answer; two first steps link the papers' own code. But all six problems came from one group each and no group spanned papers, though four labs wrote that factuality is judged by LLM judges for lack of human labels. Not saved as an example. A recruit step was built and tested on its quotes: one clean two-lab problem (grounding needs a complete knowledge base).",
+  "stats": {
+    "seconds": 80.5,
+    "papers": 80,
+    "full_text": 75,
+    "quotes_proposed": 250,
+    "quotes_kept": 232,
+    "tokens": 135526,
+    "calls": {
+      "super": 88,
+      "ultra": 2
+    }
+  },
+  "search": "Searching arXiv for “hallucination detection language models”, “hallucination”, “factuality”, “faithfulness”",
+  "field": "truthfulness and hallucination detection in language models",
+  "terms": [
+    {
+      "term": "hallucination",
+      "meaning": "when a language model generates text that sounds plausible but is factually incorrect or unsupported by input"
+    },
+    {
+      "term": "factuality",
+      "meaning": "the degree to which a model's output aligns with verifiable facts or known knowledge"
+    },
+    {
+      "term": "faithfulness",
+      "meaning": "whether a model's output stays true to the information provided in its input or context"
+    },
+    {
+      "term": "groundedness",
+      "meaning": "how well a model's responses are anchored in reliable sources or evidence rather than invented content"
+    },
+    {
+      "term": "detection",
+      "meaning": "methods used to identify when a model's output contains hallucinations or factual errors"
+    },
+    {
+      "term": "verification",
+      "meaning": "processes that check model outputs against external knowledge bases or trusted sources to confirm accuracy"
+    }
+  ],
+  "answer": {
+    "type": "answer",
+    "sentences": [
+      {
+        "text": "Language models still make things up because standard alignment methods like RLHF optimize for format, length, or brevity rather than factuality, and factuality-specific alignment methods have not reproduced independently or beaten base models on common benchmarks [2610.18415].",
+        "papers": [
+          "2610.18415"
+        ]
+      },
+      {
+        "text": "A core reason detection stays hard is that widely used faithfulness metrics measure only precision, whether stated claims are supported, and ignore recall, so a model that says almost nothing can score near-perfect faithfulness while missing most relevant facts [2606.09376].",
+        "papers": [
+          "2606.09376"
+        ]
+      },
+      {
+        "text": "Token-level detectors fail exactly when the generating model is confidently wrong, and low-false-alarm onset detection has a fundamental delay bound of roughly 1.3 tokens even under ideal conditions, with real detectors catching under a third of onsets at that budget [2608.18115, 2606.12476].",
+        "papers": [
+          "2608.18115",
+          "2606.12476"
+        ]
+      },
+      {
+        "text": "Evaluation itself is fragile because benchmarks often lack ground truth for prompts, forcing reliance on LLM judges and retrieval that can be systematically biased relative to human judgments [2610.18415, 2609.00494].",
+        "papers": [
+          "2610.18415",
+          "2609.00494"
+        ]
+      }
+    ],
+    "read_first": [
+      {
+        "paper_id": "2610.18415",
+        "why": "Shows why alignment doesn't fix factuality and why evaluation is fragile"
+      },
+      {
+        "paper_id": "2606.09376",
+        "why": "Explains the precision-recall blind spot in faithfulness metrics"
+      },
+      {
+        "paper_id": "2608.18115",
+        "why": "Details why token-level detection fails on confident errors"
+      },
+      {
+        "paper_id": "2606.12476",
+        "why": "Quantifies fundamental delay bounds for onset detection"
+      },
+      {
+        "paper_id": "2609.00494",
+        "why": "Describes human-anchored evaluation to fix judge bias"
+      }
+    ]
+  },
+  "problems": [
+    {
+      "title": "Hallucination detection struggles with multi-hop reasoning",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2609.00494",
+          "quote": "Rare but complex cases, for example, failures in multi-hop reasoning across multiple pieces of evidence, may still occur and may not be captured by FSA.",
+          "label": "uncaptured complex failure modes like multi-hop reasoning"
+        }
+      ],
+      "papers": [
+        "2609.00494"
+      ],
+      "explanation": "Current hallucination detectors miss errors that require chaining together several pieces of evidence, known as multi-hop reasoning failures. The paper shows that even with strategic human annotation, these rare but complex cases can slip through the FSA method.",
+      "first_step": "Reproduce the strategic annotation sampling from \"Human-Anchored Factuality Evaluation with Strategic Annotation\" on a small public QA dataset such as HotpotQA. Use an LLM judge to score all examples, then apply the paper's selective sampling to choose a subset for human labeling, and measure whether the human-annotated subset catches more multi-hop errors than random sampling.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Confidence scores don't reliably indicate truthfulness",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2606.06959",
+          "quote": "self-reported confidence is poorly aligned with factual truthfulness",
+          "label": "confidence scores do not reliably indicate truthfulness"
+        }
+      ],
+      "papers": [
+        "2606.06959"
+      ],
+      "explanation": "Models often report high confidence when they are factually wrong, so self-reported confidence cannot be trusted as a truthfulness signal. The OpenHalDet benchmark was built to test detectors across many generation settings, giving a common ground to study this misalignment. A reliable confidence, truthfulness link would let systems flag uncertain outputs without extra labeling cost.",
+      "first_step": "Clone the OpenHalDet repository from https://github.com/Nellie179/Hallucination-Detection and run the provided evaluation scripts on the benchmark's included generation scenarios. Compare each detector's confidence scores against the ground-truth factuality labels to quantify the alignment gap.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Token-level AUC overestimates performance due to dependence assumption",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2608.18115",
+          "quote": "Token-level AUC treats tokens within the same example as independent observations, which inflates effective sample size; example-level AUC (0.795 for BiGRU) is consistently lower but preserves model rankings.",
+          "label": "token-level AUC overestimates performance due to dependence assumption"
+        }
+      ],
+      "papers": [
+        "2608.18115"
+      ],
+      "explanation": "Token-level AUC treats every token as an independent data point, which artificially inflates the effective sample size and makes detectors look better than they are. The paper shows that example-level AUC is consistently lower but preserves model rankings, so switching to example-level metrics gives a truer picture of detection quality.",
+      "first_step": "Using the code from \"Temporal Multi-Signal Fusion for Token-Level Hallucination Detection\" at https://github.com/YehudaItkin/temporal-hallucination-detection, run the BiGRU detector on its test set and compute both token-level and example-level AUC. Report the gap between the two metrics to confirm the inflation effect.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Lack of suitable datasets for non-entity-centric text hallucination evaluation",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2608.05228",
+          "quote": "Extending the evaluation to less entity-centric long-form generations remains challenging because few datasets provide fine-grained human factuality annotations at the atomic-fact level, and creating such annotations is costly.",
+          "label": "lack of suitable datasets for non-entity-centric text"
+        }
+      ],
+      "papers": [
+        "2608.05228"
+      ],
+      "explanation": "Evaluating hallucinations in long-form, non-entity-centric text is hard because few datasets have fine-grained human annotations at the atomic-fact level, and creating them is expensive. TriQua proposes a flexible fact representation that mixes simple triples with hyperrelational facts to keep context while staying granular. Better datasets would let detectors move beyond short entity-focused snippets.",
+      "first_step": "Implement the TriQua fact extraction pipeline from \"TriQua: Reconciling Granularity and Context in Factuality Evaluation\" on a small set of long-form model outputs such as Wikipedia article sections. Compare the resulting hyperrelational facts against standard triple extraction to see if they preserve more context for verification.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Faithfulness evaluation remains unresolved",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2610.29602",
+          "quote": "Finally, faithfulness itself remains an open evaluation problem.",
+          "label": "faithfulness evaluation is unresolved"
+        }
+      ],
+      "papers": [
+        "2610.29602"
+      ],
+      "explanation": "Faithfulness, whether a model's output stays grounded in its source, lacks a settled evaluation method, especially for diffusion language models that generate bidirectionally. The paper studies this on table-to-text generation using the ToTTo dataset where highlighted cells make grounding directly testable. A faithfulness metric would let us compare diffusion and autoregressive models on equal footing.",
+      "first_step": "Download the ToTTo dataset and fine-tune a small masked diffusion model (e.g., MDLM) on a subset of table-to-text pairs. Evaluate faithfulness by checking whether generated tokens align with the highlighted source cells, following the diagnostic setup from \"A Diagnostic Study of Faithfulness in Diffusion Language Models for Table-to-Text Generation\".",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Retry recovery rates remain suboptimal for hallucination correction",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2608.23897",
+          "quote": "The primary exhausts its retry budget on 28.7%; intra model retries recover roughly a quarter of those, and cross model fallback recovers a further 16.5% of the remainder.",
+          "label": "retry recovery rates remain suboptimal"
+        }
+      ],
+      "papers": [
+        "2608.23897"
+      ],
+      "explanation": "When a code model hallucinates a package name, retries only recover a fraction of the errors: the primary model exhausts its retry budget on 28.7% of cases, intra-model retries fix about a quarter, and cross-model fallback adds another 16.5% of the remainder. The paper proposes a two-layer detector with a PyPI existence check and a Random Forest classifier. Improving recovery would reduce supply-chain risks from slopsquatting.",
+      "first_step": "Build the first-layer PyPI existence check from \"Names Can Hurt: Spotting Slopsquatting Risks Caused by Package Name Hallucinations in Local Coding LLMs\" and run it on a list of package names generated by a local coding LLM. Measure how many hallucinated names the deterministic check catches before any classifier is needed.",
+      "needs": "a laptop",
+      "addressed": null
+    }
+  ],
+  "papers": [
+    {
+      "id": "2610.25770",
+      "title": "VHA: VQA-based Hallucination Assessment for Generative Image Super-Resolution"
+    },
+    {
+      "id": "2609.00494",
+      "title": "Human-Anchored Factuality Evaluation with Strategic Annotation"
+    },
+    {
+      "id": "2606.09376",
+      "title": "Precision Is Not Faithfulness: Coverage-Aware Evaluation of Grounded Generation with a Complete Oracle"
+    },
+    {
+      "id": "2606.06959",
+      "title": "OpenHalDet: A Unified Benchmark for Hallucination Detection across Diverse Generation Scenarios"
+    },
+    {
+      "id": "2610.18415",
+      "title": "Do Factuality Methods Make LLMs More Factual? Reproducibility and Fair Comparison"
+    },
+    {
+      "id": "2606.06824",
+      "title": "Two-Generator Discrete and Faithful Subgroups of Tree Automorphisms"
+    },
+    {
+      "id": "2608.18115",
+      "title": "Temporal Multi-Signal Fusion for Token-Level Hallucination Detection"
+    },
+    {
+      "id": "2608.05228",
+      "title": "TriQua: Reconciling Granularity and Context in Factuality Evaluation"
+    },
+    {
+      "id": "2610.29602",
+      "title": "A Diagnostic Study of Faithfulness in Diffusion Language Models for Table-to-Text Generation"
+    },
+    {
+      "id": "2608.23897",
+      "title": "Names Can Hurt: Spotting Slopsquatting Risks Caused by Package Name Hallucinations in Local Coding LLMs"
+    },
+    {
+      "id": "2606.08831",
+      "title": "Inference-Time Conformal Reasoning with Valid Factuality Control for Large Language Models"
+    },
+    {
+      "id": "2607.04314",
+      "title": "When and why do handcrafted cues help self-supervised anti-spoofing? A causal and faithfulness analysis"
+    },
+    {
+      "id": "2606.12476",
+      "title": "Quickest Detection of Hallucination Onset: Delay Bounds and Learned CUSUM Statistics"
+    },
+    {
+      "id": "2609.01375",
+      "title": "IntroConformal: Conformal Factuality Guarantees for Large Vision-Language Models via Introspective Signals"
+    },
+    {
+      "id": "2605.25052",
+      "title": "Faithfulness Metrics Don't Measure Faithfulness: A Meta-Evaluation with Ground Truth"
+    },
+    {
+      "id": "2606.29809",
+      "title": "How Far Can You Get Without a GPU? A Systematic Benchmark of Lightweight Hallucination Detection Across Question Answering, Dialogue, and Summarisation"
+    },
+    {
+      "id": "2605.01749",
+      "title": "Only Say What You Know: Calibration-Aware Generation for Long-Form Factuality"
+    },
+    {
+      "id": "2605.24960",
+      "title": "Investigating the Interplay between Contextual and Parametric Chain-of-Thought Faithfulness under Optimization"
+    },
+    {
+      "id": "2608.10008",
+      "title": "Do LLM Recommenders Know When They're Hallucinating? Auditing Confidence Calibration in Catalog Faithfulness"
+    },
+    {
+      "id": "2605.29712",
+      "title": "Teaching Language Models to Check Grounded Claim Factuality with Human Test-Taking Strategies"
+    },
+    {
+      "id": "2610.18498",
+      "title": "Aligning Faithfulness for Theory-Scale Autoformalization"
+    },
+    {
+      "id": "2610.14976",
+      "title": "Metric-Driven Reinforcement Learning for Object Hallucination Reduction in LVLM-Based Image Captioning"
+    },
+    {
+      "id": "2606.22474",
+      "title": "Not All Claims Are Equally Risky: FACTOR for Adaptive Verification in Factual Long-Form Generation"
+    },
+    {
+      "id": "2605.15282",
+      "title": "Fluency and Faithfulness in Human and Machine Literary Translation"
+    },
+    {
+      "id": "2605.02504",
+      "title": "A multilingual hallucination benchmark: MultiWikiQHalluA"
+    },
+    {
+      "id": "2609.38222",
+      "title": "Conformal Factuality Control for Multi-Hop Retrieval-Augmented Generation"
+    },
+    {
+      "id": "2608.00205",
+      "title": "Averaging Bias: Human Faithfulness Annotations are not Locally Faithful"
+    },
+    {
+      "id": "2607.23361",
+      "title": "Hallucination Rates in Language Generation"
+    },
+    {
+      "id": "2605.26840",
+      "title": "Optimising Factual Consistency in Summarisation via Preference Learning from Multiple Imperfect Metrics"
+    },
+    {
+      "id": "2605.27879",
+      "title": "Towards Faithful Agentic XAI: A Verification Method and an Open-World Benchmark for Better Model Faithfulness"
+    },
+    {
+      "id": "2605.26366",
+      "title": "Automatic Layer Selection for Hallucination Detection"
+    },
+    {
+      "id": "2610.34872",
+      "title": "Adaptive Retrieval, Selective Answers: Evaluating Conformal Factuality in Agentic RAG"
+    },
+    {
+      "id": "2605.08325",
+      "title": "CAMAL: Improving Attention Alignment and Faithfulness with Segmentation Masks"
+    },
+    {
+      "id": "2605.26808",
+      "title": "Innovation: An Almost Characterization of Hallucination"
+    },
+    {
+      "id": "2608.26118",
+      "title": "ElementCheck: Complexity-Aware Long-Form Text Factuality Evaluation via Sentence Elements"
+    },
+    {
+      "id": "2610.07894",
+      "title": "Rethinking Faithfulness in LLMs: A Pairwise Context-Sensitive Perspective"
+    },
+    {
+      "id": "2610.04409",
+      "title": "Understanding and Mitigating Hallucination Escape in Tool-Using LLM Agents"
+    },
+    {
+      "id": "2605.19111",
+      "title": "FAGER: Factually Grounded Evaluation and Refinement of Text-to-Image Models"
+    },
+    {
+      "id": "2607.21090",
+      "title": "Training Large Language Models for Self-Explanation Faithfulness"
+    },
+    {
+      "id": "2607.01117",
+      "title": "MoHallBench: A Benchmark for Motion Hallucination in Video Large Language Models"
+    },
+    {
+      "id": "2610.32883",
+      "title": "When Should I Trust This? Designing and Evaluating Factuality Indicators for LLM-based Chatbots"
+    },
+    {
+      "id": "2608.30996",
+      "title": "Faithfulness Is Not Free: Auditing Offline KV-Cache Quantization in Retrieval-Augmented Generation"
+    },
+    {
+      "id": "2609.22152",
+      "title": "Is Imagination Derived from Hallucination? A Cross-Taxonomy Evaluation of Imagination and Hallucination in Large Language Models"
+    },
+    {
+      "id": "2608.05823",
+      "title": "Decomposed Entailment for Factuality Checking and Hallucination Detection"
+    },
+    {
+      "id": "2605.16905",
+      "title": "AIM: Adversarial Information Masking for Faithfulness Evaluation of Saliency Maps"
+    },
+    {
+      "id": "2605.30911",
+      "title": "What Makes LVLMs Hallucinate Less? Unveiling the Architectural Factors Behind Hallucination Robustness"
+    },
+    {
+      "id": "2609.15745",
+      "title": "Look Before You Leap: Factual Decoding with Internal Attribution Signals"
+    },
+    {
+      "id": "2607.11816",
+      "title": "Relaxing Faithfulness with Intervention-Only Causal Discovery"
+    },
+    {
+      "id": "2610.27027",
+      "title": "Does Multi-Agent Collaboration Reduce Hallucination in Clinical Tasks?"
+    },
+    {
+      "id": "2605.29336",
+      "title": "Enhancing Factuality through Consensus and Consistency in Summarization Using Minimum Bayes Risk Decoding"
+    },
+    {
+      "id": "2610.12493",
+      "title": "Faithfulness Without Anchors: A Position Paper on the Structural Misalignments of Explainable AI Faithfulness Metrics for Feature Importance"
+    },
+    {
+      "id": "2605.17007",
+      "title": "HalluScore: Large Language Model Hallucination Question Answering Benchmark"
+    },
+    {
+      "id": "2606.21359",
+      "title": "Does Finetuning with Scientific Data Increase Hallucinations? A Multi-domain Factuality Evaluation of LLMs"
+    },
+    {
+      "id": "2608.03745",
+      "title": "Risky Business: Measuring The Faithfulness-Safety Tension"
+    },
+    {
+      "id": "2609.04561",
+      "title": "Reducing Hallucinated Transcripts in Whisper via Hallucination Space Projection"
+    },
+    {
+      "id": "2610.14609",
+      "title": "EviScene: Beyond \"Is It AI?\" for Agentic Image Factuality Assessment"
+    },
+    {
+      "id": "2606.07311",
+      "title": "CultureScore: Evaluating Cultural Faithfulness in Video Generation Models"
+    },
+    {
+      "id": "2609.01888",
+      "title": "Does Playing it Safe Count as Faithfulness? Reassessing LVLM Hallucination Mitigation Methods"
+    },
+    {
+      "id": "2606.18037",
+      "title": "ProvenanceGuard: Source-Aware Factuality Verification for MCP-Based LLM Agents"
+    },
+    {
+      "id": "2606.29613",
+      "title": "Does Role Specialization Matter for Explanation Faithfulness in Mixture-of-Experts?"
+    },
+    {
+      "id": "2609.33893",
+      "title": "MISHAP-Bench: A Hallucination Benchmark for Large Audio-Language Models"
+    },
+    {
+      "id": "2605.05244",
+      "title": "Towards Dependable Retrieval-Augmented Generation Using Factual Confidence Prediction"
+    },
+    {
+      "id": "2605.24286",
+      "title": "Faithfulness as Information Flow: Evaluating and Training Faithful Chain-of-Thought Reasoning"
+    },
+    {
+      "id": "2607.17883",
+      "title": "Zero Hallucination, by Construction: Hallucination-Aware Layered Oversight for Trustworthy Enterprise AI"
+    },
+    {
+      "id": "2609.15561",
+      "title": "Can We Trust the Judges? Validation of Factuality Evaluation Methods via Answer Perturbation"
+    },
+    {
+      "id": "2609.04343",
+      "title": "A Removal Based Approach to Improve LLM Faithfulness at Test-Time"
+    },
+    {
+      "id": "2606.07937",
+      "title": "Hallucination Cascade: Analyzing Error Propagation in Multi-Agent LLM Systems"
+    },
+    {
+      "id": "2608.24350",
+      "title": "FARCA: Fact-Aligned Reliability-Aware Credit Assignment for Reinforcement Learning with Factual Supervision"
+    },
+    {
+      "id": "2610.17898",
+      "title": "Evaluating the Causal Faithfulness of SHAP as a Candidate Attribution Method for SAE Features"
+    },
+    {
+      "id": "2610.17125",
+      "title": "ToolHACE: A Dataset for Detecting Hallucinations in Tool-Based LLM Responses"
+    },
+    {
+      "id": "2609.22223",
+      "title": "EAVer: Long-Form Factuality Verification as an End-to-End Agentic Policy"
+    },
+    {
+      "id": "2606.31711",
+      "title": "Arena-T2I Hard: Benchmarking and Improving Faithfulness with Dependency-Aware Checklist"
+    },
+    {
+      "id": "2610.36191",
+      "title": "LLM Hallucination Detection via Low-rank Multilinear Decomposition"
+    },
+    {
+      "id": "2607.05861",
+      "title": "Mitigating Factual Hallucination in Large Reasoning Models via Mixed-Mode Advantage Regularization"
+    },
+    {
+      "id": "2610.00568",
+      "title": "Emergent Unfaithfulness: How Alignment Training Causes Language Models to Silently Override Task Faithfulness"
+    },
+    {
+      "id": "2608.30653",
+      "title": "Fine-Grained Multi Image Object Hallucination Benchmark"
+    },
+    {
+      "id": "2608.20607",
+      "title": "JuryProbe: An Empirical Consensus-Risk Diagnostic for Routing Reference-Free Factuality Judge Panels to Grounded Verification"
+    },
+    {
+      "id": "2610.22841",
+      "title": "The Reliance Hypothesis: Chain-of-Thought Faithfulness Rises as Language Resource Level Falls"
+    },
+    {
+      "id": "2609.09895",
+      "title": "Can We Trust Video Hallucination Detectors? VidHalLoc for Evaluating the Evaluators"
+    },
+    {
+      "id": "2609.14448",
+      "title": "NeuroActiSep: Detecting Factual Hallucinations from Feed-Forward Neurons in a Single Pass"
+    }
+  ]
+}

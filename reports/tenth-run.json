@@ -1,0 +1,517 @@
+{
+  "date": "2026-10-29",
+  "run_id": "5ff959f89105",
+  "input": "I'm a hobbyist with one GPU. What's still hard about teaching a robot arm a new task from just a few demonstrations?",
+  "verdict": "Same robot arm question with the wider search. 80 papers, 79 in full, 191 of 203 quotes kept (94%), 35 s. Six problems, all on the question, every first step names a real paper from the run. Weakness: each problem comes from one group, so none shows independent labs agreeing, and one (generalization to complex real-world settings) is generic. Was the second example until the eleventh run replaced it.",
+  "stats": {
+    "seconds": 35.4,
+    "papers": 80,
+    "full_text": 79,
+    "quotes_proposed": 203,
+    "quotes_kept": 191,
+    "tokens": 128732,
+    "calls": {
+      "super": 92,
+      "ultra": 2
+    }
+  },
+  "search": "Searching arXiv for “one-shot imitation learning manipulation”, “meta-imitation learning few demonstrations”, “few-shot imitation learning”, “one-shot imitation learning”, “meta-imitation learning”",
+  "field": "robot learning from demonstration",
+  "terms": [
+    {
+      "term": "few-shot imitation learning",
+      "meaning": "teaching a robot to perform a new task using only a small number of example demonstrations"
+    },
+    {
+      "term": "one-shot imitation learning",
+      "meaning": "learning a new task from a single demonstration by the human teacher"
+    }
+  ],
+  "answer": {
+    "type": "answer",
+    "sentences": [
+      {
+        "text": "These papers show that few-demonstration robot learning still struggles with compounding errors over long horizons, sharp performance drops as demonstrations decrease, sensitivity to distribution shifts like new object poses or lighting, and the need for safe exploration during real-world trial-and-error.",
+        "papers": [
+          "2606.20867",
+          "2607.17003",
+          "2606.09758",
+          "2607.01651"
+        ]
+      },
+      {
+        "text": "A single demonstration must transfer across viewpoint, grasp, and object changes while rejecting disturbances during execution, which requires both trajectory transfer and closed-loop stability.",
+        "papers": [
+          "2609.30404"
+        ]
+      },
+      {
+        "text": "Demonstration data itself is often noisy and temporally irregular, and standard downsampling cannot fix speed-induced non-uniformity or redundant pauses that degrade policy learning.",
+        "papers": [
+          "2606.22907"
+        ]
+      },
+      {
+        "text": "Richer supervision signals like language critiques or recoverability-conditioned exploration help, but current methods still trade off between conservative safety and sufficient coverage of recovery regions near expert behavior.",
+        "papers": [
+          "2607.01225",
+          "2609.33336"
+        ]
+      }
+    ],
+    "read_first": [
+      {
+        "paper_id": "2609.30404",
+        "why": "One-shot framework handling transfer and robust execution"
+      },
+      {
+        "paper_id": "2607.01651",
+        "why": "Single-demo RL with automated safety on real robots"
+      },
+      {
+        "paper_id": "2606.20867",
+        "why": "Systematic stress test of few-shot VLA models"
+      },
+      {
+        "paper_id": "2606.22907",
+        "why": "Preprocessing noisy demos for better data quality"
+      },
+      {
+        "paper_id": "2606.09758",
+        "why": "Retrieval-based IL for out-of-distribution generalization"
+      }
+    ]
+  },
+  "problems": [
+    {
+      "title": "Tracking fails under occlusion, motion blur, or poor surface properties",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2609.30404",
+          "quote": "execution requires the functional-part points to remain trackable; large motions outside the camera views, severe occlusion, or unreliable depth on transparent or specular surfaces can break tracking.",
+          "label": "tracking fails under occlusion, motion blur, or poor surface properties"
+        }
+      ],
+      "papers": [
+        "2609.30404"
+      ],
+      "explanation": "Tracking breaks when objects are hidden, move too fast, or have tricky surfaces like glass or shiny metal. The robot loses the points it uses to know where things are. Solving this would let robots keep working even when the view gets messy.",
+      "first_step": "Run the code from \"POIL: Point-based One-Shot Imitation Learning with Stable Dynamical Systems\" on a scene with a transparent or specular object and watch where tracking fails.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Recovery fails under diverse failure modes due to reliance on single-trajectory data",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2607.01651",
+          "quote": "for tasks with highly diverse failure modes, AutoSERL’s recovery mechanism cannot recover from failures effectively during training because it relies on information from only a single trajectory.",
+          "label": "Recovery fails under diverse failure modes due to reliance on single-trajectory data"
+        }
+      ],
+      "papers": [
+        "2607.01651"
+      ],
+      "explanation": "The robot can't recover from different kinds of mistakes because it only learns from one successful demonstration. Real tasks have many ways to go wrong. Fixing this would make robots more resilient in practice.",
+      "first_step": "Run the AutoSERL code from \"One Demonstration Is Enough for Real-World Robotic Reinforcement Learning\" on a task where the robot can fail in several ways, dropping, slipping, misaligning, and log where recovery breaks down.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Generalization to complex real-world robotics",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2607.01225",
+          "quote": "it remains an open question how well the approach generalizes to more complex and dynamic real-world robotic settings.",
+          "label": "generalization to complex real-world robotics"
+        }
+      ],
+      "papers": [
+        "2607.01225"
+      ],
+      "explanation": "We don't know if the method works on real robots with noise, distractions, and unexpected changes. Lab results often don't transfer. Answering this would show whether the approach is ready for deployment.",
+      "first_step": "Take the code from \"Language-Critique Imitation Learning from Suboptimal Demonstrations\" and test it on a real robot arm with a slightly different task than the paper used.",
+      "needs": "a lab",
+      "addressed": null
+    },
+    {
+      "title": "Extension to visuomotor policies not yet achieved",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2606.01238",
+          "quote": "We plan to extend this work to visuomotor policies using pretrained representations and lightweight learning methods.",
+          "label": "extension to visuomotor policies not yet achieved"
+        }
+      ],
+      "papers": [
+        "2606.01238"
+      ],
+      "explanation": "The current method doesn't use camera input directly for control. Adding vision would let the robot react to what it sees instead of relying on fixed representations. This is a key step toward general visuomotor skills.",
+      "first_step": "Take the code from \"Training-Free Imitation Learning with Closed-Form Diffusion Policies\" and add a pretrained visual encoder like ResNet to feed images into the policy.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Predicate vocabulary and rules require manual design per domain",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2605.07166",
+          "quote": "Our predicate vocabulary and rules are currently hand-crafted per domain; learning them via predicate-invention methods [[38](#bib.bib46)] is an immediate next step.",
+          "label": "Predicate vocabulary and rules require manual design per domain"
+        }
+      ],
+      "papers": [
+        "2605.07166"
+      ],
+      "explanation": "Right now humans must write the logic rules for each new task by hand. Automating this would let robots learn new domains without expert engineering each time. It's the difference between programming and learning.",
+      "first_step": "Run the code from \"Neurosymbolic Imitation Learning with Human Guidance: A Privileged Information Approach\" on a simple domain, then try replacing one hand-crafted predicate with a learned classifier.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Uncertainty and recoverability estimation remains unreliable far from data",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2609.33336",
+          "quote": "Future work may improve the two signals underlying acquisition by developing better calibrated epistemic uncertainty estimates and more reliable recoverability estimates beyond finite-horizon world-model imagination and discriminator scores, especially farther from current data support.",
+          "label": "uncertainty and recoverability estimation remains unreliable far from data"
+        }
+      ],
+      "papers": [
+        "2609.33336"
+      ],
+      "explanation": "The robot's confidence and recovery predictions get unreliable in unfamiliar states. Better estimates would let it explore safely instead of freezing or crashing. This matters for any robot that must go beyond its training data.",
+      "first_step": "Run the code from \"Beyond Conservatism: Recoverability-Conditioned Exploration for Model-Based Imitation Learning\" and measure how uncertainty and recoverability scores change as the robot moves farther from training states.",
+      "needs": "one GPU",
+      "addressed": null
+    }
+  ],
+  "papers": [
+    {
+      "id": "2606.20867",
+      "title": "FOCA: Future-Oriented Conditioning for Data-Efficient Vision-Language-Action Adaptation"
+    },
+    {
+      "id": "2609.30404",
+      "title": "POIL: Point-based One-Shot Imitation Learning with Stable Dynamical Systems"
+    },
+    {
+      "id": "2607.01651",
+      "title": "One Demonstration Is Enough for Real-World Robotic Reinforcement Learning"
+    },
+    {
+      "id": "2607.17003",
+      "title": "Scalable Causal Imitation Learning"
+    },
+    {
+      "id": "2607.13436",
+      "title": "Distributionally Robust and Safe Imitation Learning"
+    },
+    {
+      "id": "2606.09758",
+      "title": "Difference-Aware Retrieval Policies for Imitation Learning"
+    },
+    {
+      "id": "2605.08450",
+      "title": "Zero-shot Imitation Learning by Latent Topology Mapping"
+    },
+    {
+      "id": "2607.01225",
+      "title": "Language-Critique Imitation Learning from Suboptimal Demonstrations"
+    },
+    {
+      "id": "2605.01778",
+      "title": "Adversarial Imitation Learning with General Function Approximation: Theoretical Analysis and Practical Algorithms"
+    },
+    {
+      "id": "2606.01238",
+      "title": "Training-Free Imitation Learning with Closed-Form Diffusion Policies"
+    },
+    {
+      "id": "2605.11762",
+      "title": "NavOL: Navigation Policy with Online Imitation Learning"
+    },
+    {
+      "id": "2605.07166",
+      "title": "Neurosymbolic Imitation Learning with Human Guidance: A Privileged Information Approach"
+    },
+    {
+      "id": "2609.33336",
+      "title": "Beyond Conservatism: Recoverability-Conditioned Exploration for Model-Based Imitation Learning"
+    },
+    {
+      "id": "2607.07859",
+      "title": "Feedback Manipulation Regularization: Enabling Offline Agent Alignment for Imitation Learning"
+    },
+    {
+      "id": "2606.22907",
+      "title": "Improving Robotic Imitation Learning via Trajectory Standardization"
+    },
+    {
+      "id": "2607.06442",
+      "title": "SIEVE: Structure-Aware Data Selection for Imitation Learning with VLA Models"
+    },
+    {
+      "id": "2605.23847",
+      "title": "Instrumentation for Imitation Learning: Enhancing Training Datasets for Clothes Hanger Insertion"
+    },
+    {
+      "id": "2605.26649",
+      "title": "On the Generalization Capabilities, Design Choices and Limitations of Keypoint Imitation Learning"
+    },
+    {
+      "id": "2610.17709",
+      "title": "Where Small Mistakes Matter: Quantifying State Criticality for Imitation Learning"
+    },
+    {
+      "id": "2605.16175",
+      "title": "Imitation learning for clinical decision support in pediatric ECMO"
+    },
+    {
+      "id": "2608.26009",
+      "title": "Imitation Learning for Connection-Tableau Construction"
+    },
+    {
+      "id": "2610.32093",
+      "title": "DiscoDemo: Discovering Efficient and Diverse Robot Demonstrations for Imitation Learning"
+    },
+    {
+      "id": "2606.07389",
+      "title": "Simulation-Driven Imitation Learning for Biosignals-Free Shared-Autonomy Prosthetic Grasping"
+    },
+    {
+      "id": "2606.20056",
+      "title": "VFILC: Accurate Frequency Extrapolations in Imitation Learning via Sampling Frequency ILC"
+    },
+    {
+      "id": "2606.00730",
+      "title": "Infeasible optimization problems and the hierarchical augmented Lagrangian method in imitation learning"
+    },
+    {
+      "id": "2607.26047",
+      "title": "S2A2: Audio-Visual Imitation Learning for Manipulation Tasks Using Acoustic Spatial Information"
+    },
+    {
+      "id": "2605.07943",
+      "title": "TAVIS: A Benchmark for Egocentric Active Vision and Anticipatory Gaze in Imitation Learning"
+    },
+    {
+      "id": "2605.10166",
+      "title": "Data-Asymmetric Latent Imagination and Reranking for 3D Robotic Imitation Learning"
+    },
+    {
+      "id": "2605.28736",
+      "title": "Imitation Learning for Robot Assistance in Open Surgery: A Multi-Policy Evaluation on Suture Following"
+    },
+    {
+      "id": "2609.08123",
+      "title": "DISEIL: Demonstration Distillation for Sample-Efficient Imitation Learning"
+    },
+    {
+      "id": "2605.03357",
+      "title": "Population-Aware Imitation Learning in Mean-field Games with Common Noise"
+    },
+    {
+      "id": "2605.25414",
+      "title": "How to Mitigate the Distribution Shift Problem in Robotics Control: A Robust and Adaptive Approach Based on Offline to Online Imitation Learning"
+    },
+    {
+      "id": "2606.01072",
+      "title": "Expanding Spatial and Temporal Context for Robotic Imitation Learning With Scene Graphs"
+    },
+    {
+      "id": "2610.00542",
+      "title": "Does Continual Imitation Learning Remain Grounded? A Language-Perturbed Benchmark for Robotic Task Retention"
+    },
+    {
+      "id": "2608.18258",
+      "title": "VERAGMIL: Virtual Environment for Scooping Granular Foods with Imitation Learning Models"
+    },
+    {
+      "id": "2610.18163",
+      "title": "RESTA: Time-Scaling Augmentation for Data-Efficient Robot Imitation Learning"
+    },
+    {
+      "id": "2605.28372",
+      "title": "Teacher-Student Representational Alignment for Reinforcement Learning-Driven Imitation Learning"
+    },
+    {
+      "id": "2606.15514",
+      "title": "Reinforcement Learning-Guided Retrieval with Soft Fusion for Robust Multimodal Imitation Learning under Missing Modalities"
+    },
+    {
+      "id": "2609.35698",
+      "title": "Provable Benefits of Regularization: Fast Rates for Adversarial Imitation Learning"
+    },
+    {
+      "id": "2606.22056",
+      "title": "Provably Efficient Policy-Reward Co-Pretraining for Adversarial Imitation Learning"
+    },
+    {
+      "id": "2609.32762",
+      "title": "An Empirical Study on What Matters for Viewpoint-Generalizable Policies in Visual Imitation Learning"
+    },
+    {
+      "id": "2605.05081",
+      "title": "Provable imitation learning for control of instability in partially-observed Vlasov--Poisson equations"
+    },
+    {
+      "id": "2605.09183",
+      "title": "Learning When to Stop: Selective Imitation Learning Under Arbitrary Dynamics Shift"
+    },
+    {
+      "id": "2606.12334",
+      "title": "Fourier Features Let Agents Learn High Precision Policies with Imitation Learning"
+    },
+    {
+      "id": "2605.17017",
+      "title": "When Dynamics Shift, Robust Task Inference Wins: Offline Imitation Learning with Behavior Foundation Models Revisited"
+    },
+    {
+      "id": "2606.21053",
+      "title": "Imitation Learning for Elder-Facing Speech Synthesis"
+    },
+    {
+      "id": "2607.14200",
+      "title": "Augmentations for Robust and Efficient Imitation Learning in Streamed Video Games"
+    },
+    {
+      "id": "2607.29617",
+      "title": "When Does On-Policy Interaction Help? Representational Tradeoffs in Value-Based Imitation Learning"
+    },
+    {
+      "id": "2609.17757",
+      "title": "Imitation Learning for Autonomous Driving in CARLA"
+    },
+    {
+      "id": "2606.30445",
+      "title": "When Does Online Imitation Learning Help in LLM Post-Training? The Role of (Non-)Realizability Beyond Horizon"
+    },
+    {
+      "id": "2609.38225",
+      "title": "SynIL: Leveraging Synergy for Offline Imitation Learning from Imperfect Demonstration Datasets"
+    },
+    {
+      "id": "2609.37599",
+      "title": "BlenDAgger: Blended Shared Control for Interactive Imitation Learning"
+    },
+    {
+      "id": "2606.04269",
+      "title": "Instant-Fold: In-Context Imitation Learning for Deformable Object Manipulation"
+    },
+    {
+      "id": "2609.37135",
+      "title": "Multi-Granularity Language-Guided Imitation Learning via Instruction Decomposition"
+    },
+    {
+      "id": "2606.19752",
+      "title": "Temporal Self-Imitation Learning"
+    },
+    {
+      "id": "2609.38407",
+      "title": "Disagreement-Regularized Imitation Learning for Image-Based Continuous Control with Gaussian and Beta Policies"
+    },
+    {
+      "id": "2607.28135",
+      "title": "LM-GRASP: Instance-Specific Language Models for Combinatorial Construction via Online Imitation Learning"
+    },
+    {
+      "id": "2609.29822",
+      "title": "Self-Supervised Anchoring of Fingertip Sensing to Proprioception and Proactive Actions for Robot Imitation Learning"
+    },
+    {
+      "id": "2607.21049",
+      "title": "GuidedAttention: Interpretable and Correctable Visual Attention for OOD-Robust Robot Manipulation via Imitation Learning"
+    },
+    {
+      "id": "2605.19771",
+      "title": "Beyond Imitation: Learning Safe End-to-End Autonomous Driving from Hard Negatives"
+    },
+    {
+      "id": "2606.06281",
+      "title": "Multi-Resolution Tactile Imitation Learning for Contact-Rich Robotic Manipulation"
+    },
+    {
+      "id": "2606.27374",
+      "title": "World Action Models Enable Continual Imitation Learning with Recurrent Generative Replays"
+    },
+    {
+      "id": "2610.09533",
+      "title": "Contact-Aware Imitation Learning Through Contact Factorization"
+    },
+    {
+      "id": "2607.29622",
+      "title": "RayViT: Ray-Conditioned Visual Representations for Viewpoint-Robust Imitation Learning"
+    },
+    {
+      "id": "2609.15716",
+      "title": "Continuous Manifold-Decomposed Impedance Retargeting for Contact-Rich Imitation Learning"
+    },
+    {
+      "id": "2606.08154",
+      "title": "SynthICL: Scalable In-context Imitation Learning with Synthetic Data"
+    },
+    {
+      "id": "2610.07167",
+      "title": "Interleaved Projected Gradient Descent for Safe Imitation Learning"
+    },
+    {
+      "id": "2608.20784",
+      "title": "Rethinking Demonstration Unlearning in Imitation Learning for Robotics"
+    },
+    {
+      "id": "2606.09381",
+      "title": "ReGIL: Retrieval-Guided Imitation Learning from a Single Demonstration"
+    },
+    {
+      "id": "2609.17714",
+      "title": "Vision-Language Grounded Task-Context-Aware Imitation Learning for Robotic Disassembly"
+    },
+    {
+      "id": "2610.26507",
+      "title": "Learn the Task, Not the Schedule: Reducing Spurious Cross-Arm Coupling in Bimanual Imitation Learning"
+    },
+    {
+      "id": "2610.18443",
+      "title": "PACT: Posture-Aligned Co-Design Technique for Hand Configuration and Retargeting in Multi-Finger Imitation Learning"
+    },
+    {
+      "id": "2607.25731",
+      "title": "Tri-Manual Visuomotor Imitation Learning of Robot Policies"
+    },
+    {
+      "id": "2605.23762",
+      "title": "Direct Dynamic Retargeting for Humanoid Imitation Learning from Videos"
+    },
+    {
+      "id": "2609.18004",
+      "title": "Missing Bridges: Composition-Aware Active Imitation Learning"
+    },
+    {
+      "id": "2609.19040",
+      "title": "Learning to Stack: Cube-Stacking Imitation Learning from Virtual Reality Demonstrations"
+    },
+    {
+      "id": "2606.20871",
+      "title": "Geometric Entropy: When Trajectory Diversity Helps and Hurts in Imitation Learning"
+    },
+    {
+      "id": "2606.11577",
+      "title": "Distortion-Resilient Robotic Imitation Learning for Autonomous Cable Routing"
+    },
+    {
+      "id": "2609.22730",
+      "title": "BEACON: Belief-Enabled Adaptive CONtrol for Imitation Learning under Uncertainty"
+    },
+    {
+      "id": "2609.30462",
+      "title": "Policy-Calibrated DAgger: Offline Calibrated Noise Injection for Imitation Learning"
+    }
+  ]
+}

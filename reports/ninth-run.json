@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-29",
+  "run_id": "6795eba241e0",
+  "input": "I'm a hobbyist with one GPU. What's still hard about teaching a robot arm a new task from just a few demonstrations?",
+  "verdict": "First question outside RLHF: a hobbyist teaching a robot arm from a few demonstrations. Nemotron searched only narrow phrases like few-shot imitation learning, which match a handful of recent papers: 3 papers, 2 problems, 34 s, 9,144 tokens. Fails the 4-problem check. Fixed: when the searches find under 30 papers, Swarm also searches the field's everyday name.",
+  "stats": {
+    "seconds": 33.7,
+    "papers": 3,
+    "full_text": 3,
+    "quotes_proposed": 6,
+    "quotes_kept": 6,
+    "tokens": 9144,
+    "calls": {
+      "super": 6,
+      "ultra": 2
+    }
+  },
+  "search": "Searching arXiv for “one-shot imitation learning manipulation”, “meta-imitation learning few demonstrations”, “few-shot imitation learning”, “one-shot imitation learning”, “meta-imitation learning”",
+  "field": "robot learning from demonstration",
+  "terms": [
+    {
+      "term": "few-shot imitation learning",
+      "meaning": "Teaching a robot to perform a new task by showing it only a small number of example actions."
+    },
+    {
+      "term": "one-shot imitation learning",
+      "meaning": "A type of few-shot learning where the robot learns a new task from just a single demonstration."
+    },
+    {
+      "term": "behavior cloning",
+      "meaning": "A method where the robot copies demonstrated actions directly by learning to map observations to actions."
+    }
+  ],
+  "answer": {
+    "type": "answer",
+    "sentences": [
+      {
+        "text": "Current methods still struggle because performance drops sharply when demonstrations are few, and transferring a single demonstration to new objects, grasps, or disturbed scenes remains unreliable.",
+        "papers": [
+          "2606.20867",
+          "2609.30404"
+        ]
+      },
+      {
+        "text": "Reinforcement learning on real robots also suffers from expensive data collection and hard reward design, so prior work needed many demos or constant human help.",
+        "papers": [
+          "2607.01651"
+        ]
+      },
+      {
+        "text": "The papers tackle this with future-oriented latent conditioning, point-based closed-loop tracking, and automated single-demo RL intervention.",
+        "papers": [
+          "2606.20867",
+          "2609.30404",
+          "2607.01651"
+        ]
+      }
+    ],
+    "read_first": [
+      {
+        "paper_id": "2609.30404",
+        "why": "One-shot point-based method with real-robot results"
+      },
+      {
+        "paper_id": "2606.20867",
+        "why": "Few-shot VLA adaptation with synthetic video co-training"
+      },
+      {
+        "paper_id": "2607.01651",
+        "why": "Single-demo RL automation on contact-heavy tasks"
+      }
+    ]
+  },
+  "problems": [
+    {
+      "title": "Tracking fails when objects are hidden or look unclear",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2609.30404",
+          "quote": "execution requires the functional-part points to remain trackable; large motions outside the camera views, severe occlusion, or unreliable depth on transparent or specular surfaces can break tracking.",
+          "label": "tracking fails under occlusion, motion blur, or poor surface properties"
+        }
+      ],
+      "papers": [
+        "2609.30404"
+      ],
+      "explanation": "Tracking breaks when the robot loses sight of key points on an object. This happens if the object moves out of the camera view, gets heavily covered, or has a shiny or clear surface that confuses depth sensors. Solving this would let a robot follow a demonstration even when the scene gets messy.",
+      "first_step": "Run a small test from the paper \"POIL: Point-based One-Shot Imitation Learning with Stable Dynamical Systems\" by tracking a few points on an object while you gradually cover it or move it out of view.",
+      "needs": "one GPU",
+      "addressed": null
+    },
+    {
+      "title": "Recovery strategies break when faced with unexpected errors",
+      "groups": 1,
+      "statements": [
+        {
+          "paper_id": "2607.01651",
+          "quote": "when the encountered failure situation falls outside the training distribution, the reliability of recovery can be significantly reduced.",
+          "label": "recovery unreliable for out-of-distribution failure situations"
+        }
+      ],
+      "papers": [
+        "2607.01651"
+      ],
+      "explanation": "Recovery policies trained on a set of failures can fail when a new kind of error appears. The paper notes that reliability drops sharply when the failure is outside what the robot saw during training. Fixing this would make robots more dependable in real homes or factories.",
+      "first_step": "Try a quick experiment from the paper \"One Demonstration Is Enough for Real-World Robotic Reinforcement Learning\" by training a recovery policy on a few failure types, then test it on a failure type you held out.",
+      "needs": "one GPU",
+      "addressed": {
+        "paper": {
+          "id": "2609.30404",
+          "title": "POIL: Point-based One-Shot Imitation Learning with Stable Dynamical Systems",
+          "authors": [
+            "Sang Min Kim",
+            "Jinwoo Seo",
+            "Hyeongjun Heo",
+            "Junho Lee",
+            "Yonghyeon Lee",
+            "Young Min Kim"
+          ],
+          "published": "2026-09-24",
+          "url": "https://arxiv.org/abs/2609.30404",
+          "abstract": "We present POIL, a point-based one-shot imitation learning framework with stable dynamical systems. While one-shot imitation avoids collecting extensive demonstrations, successful one-shot manipulation requires not only transferring a demonstrated trajectory to a novel object but also executing it robustly under changing scene conditions, grasp configurations, and external disturbances. POIL addresses both problems through a shared representation: a set of 3D points on the object's functional part, used jointly for trajectory transfer and closed-loop execution. The one-shot transfer from the demonstrated trajectory is enabled with point correspondences. POIL grounds the shared functional part with a multi-modal large language model, and transfers the trajectory across viewpoint, pose, and object category changes. During execution, multi-view tracking observes the same points online, and "
+        },
+        "quote": "POIL transfers a single demonstration across object category, grasp pose, and goal geometry, while recovering from external disturbances during execution."
+      }
+    }
+  ],
+  "papers": [
+    {
+      "id": "2606.20867",
+      "title": "FOCA: Future-Oriented Conditioning for Data-Efficient Vision-Language-Action Adaptation"
+    },
+    {
+      "id": "2609.30404",
+      "title": "POIL: Point-based One-Shot Imitation Learning with Stable Dynamical Systems"
+    },
+    {
+      "id": "2607.01651",
+      "title": "One Demonstration Is Enough for Real-World Robotic Reinforcement Learning"
+    }
+  ]
+}

@@ -1,0 +1,443 @@
+{
+  "date": "2026-10-28",
+  "run_id": "cfba727f07dc",
+  "input": "Do AI labelers grade decisions or outcomes? rlhf and rlaif",
+  "verdict": "Search fixed: the papers were on the question and the field's terms were right. Failed at grouping: the grouping reply most likely ran past its 2,000-token limit, and the error was hidden. Fixed afterwards (6,000 tokens, at most 10 groups, failures reported); not yet run again.",
+  "wall_seconds": 73.3,
+  "papers_read": 80,
+  "full_text": 79,
+  "papers_with_statements": 60,
+  "statements_kept": 175,
+  "field": "AI alignment via preference learning",
+  "queries": [
+    [
+      "process supervision"
+    ],
+    [
+      "outcome vs process supervision"
+    ],
+    [
+      "reward model"
+    ]
+  ],
+  "terms": [
+    {
+      "term": "Reinforcement Learning from Human Feedback (RLHF)",
+      "meaning": "Training an AI system using human judgments to shape its behavior by optimizing a reward signal derived from preferences over outputs."
+    },
+    {
+      "term": "Process Supervision",
+      "meaning": "Providing feedback on intermediate reasoning steps or decision-making processes rather than only on final outcomes."
+    },
+    {
+      "term": "Outcome Supervision",
+      "meaning": "Evaluating and providing feedback based solely on the final result or consequence of an action, not the steps taken to get there."
+    },
+    {
+      "term": "Reward Modeling",
+      "meaning": "Learning a function that predicts human or AI preferences over outputs, used to guide reinforcement learning in alignment tasks."
+    }
+  ],
+  "papers": [
+    {
+      "id": "2610.34221",
+      "title": "CropReward: A Human-Preference Benchmark and Reward Model for Aesthetic Image Cropping",
+      "published": "2026-10-25"
+    },
+    {
+      "id": "2610.33527",
+      "title": "Implicit Beliefs as Scalable Process Rewards for Strategic Persuasion",
+      "published": "2026-10-24"
+    },
+    {
+      "id": "2610.33245",
+      "title": "AdaPRA: Process Reward Agents with Adaptive Rubrics for Data Science",
+      "published": "2026-10-23"
+    },
+    {
+      "id": "2610.32222",
+      "title": "ACWM-RM: A Reference-Free Reward Model from Complementary Mismatch Preferences",
+      "published": "2026-10-23"
+    },
+    {
+      "id": "2610.32772",
+      "title": "Direction-Aware Token Credit Assignment with Reward-Model Gradients",
+      "published": "2026-10-23"
+    },
+    {
+      "id": "2610.30866",
+      "title": "Verus-Insight: Towards Explainable Artifact Detection in AI-Generated Videos",
+      "published": "2026-10-22"
+    },
+    {
+      "id": "2610.30765",
+      "title": "Scaling Laws for Generative Reward Models",
+      "published": "2026-10-22"
+    },
+    {
+      "id": "2610.29498",
+      "title": "A Strong MoE Is All You Need for Process Supervision",
+      "published": "2026-10-21"
+    },
+    {
+      "id": "2610.27694",
+      "title": "Enhancing Bug-Exposing Test Generation via Step-Level Credit Assignment and Self-Distillation from Valuable Failures",
+      "published": "2026-10-20"
+    },
+    {
+      "id": "2610.26410",
+      "title": "Policy-Adaptive Credit Assignment for Spatial Reasoning with Verifiable Rewards",
+      "published": "2026-10-19"
+    },
+    {
+      "id": "2610.26496",
+      "title": "Mitigating Reward Hacking in Preference Reward Models with Evolving Penalties",
+      "published": "2026-10-19"
+    },
+    {
+      "id": "2610.25269",
+      "title": "EG-GRPO: Evidence-Guided Step-level Credit Assignment for Deep Search Agents",
+      "published": "2026-10-18"
+    },
+    {
+      "id": "2610.23234",
+      "title": "MultiAgent-OPD: End-to-End Training of Hierarchical Multi-Agent Systems with On-Policy Distillation",
+      "published": "2026-10-16"
+    },
+    {
+      "id": "2610.23051",
+      "title": "Agentic In-Context Learning: What Algorithms Can Transformers Learn in Closed-Loop Interaction?",
+      "published": "2026-10-16"
+    },
+    {
+      "id": "2610.23550",
+      "title": "Reason-guided Human Reward Modeling for Preference-based Reinforcement Learning",
+      "published": "2026-10-16"
+    },
+    {
+      "id": "2610.22805",
+      "title": "Compression Precedes, Content Decides: Emergent Misalignment in Reward Models",
+      "published": "2026-10-16"
+    },
+    {
+      "id": "2610.21362",
+      "title": "LTM: Latent Transition Based In-Context Memory for Vision-Language-Action Models",
+      "published": "2026-10-15"
+    },
+    {
+      "id": "2610.21496",
+      "title": "OPRD: On-Policy Reminder Distillation for Long-Horizon Coding Agents",
+      "published": "2026-10-15"
+    },
+    {
+      "id": "2610.22331",
+      "title": "KnowGPO: Knowledge-Grouped Policy Optimization for Search Agents",
+      "published": "2026-10-15"
+    },
+    {
+      "id": "2610.22056",
+      "title": "Progress Reward Model for Reinforcement Learning via Large Language Models",
+      "published": "2026-10-15"
+    },
+    {
+      "id": "2610.21138",
+      "title": "CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF",
+      "published": "2026-10-15"
+    },
+    {
+      "id": "2610.19695",
+      "title": "C3: Rethinking Process Supervision via Confidence-Guided Credit Correction in Multi-Turn Reinforcement Learning",
+      "published": "2026-10-14"
+    },
+    {
+      "id": "2610.19832",
+      "title": "Rent-Seeking Language Models: Reward Models Set the Prices, Frequent Audits Curb the Rent",
+      "published": "2026-10-14"
+    },
+    {
+      "id": "2610.17697",
+      "title": "LeanPRM: Lean-Grounded Process Supervision for Natural Language Proof Verification",
+      "published": "2026-10-13"
+    },
+    {
+      "id": "2610.18299",
+      "title": "LegalRewardBench: Benchmarking Reward Models for Legal Preference Evaluation",
+      "published": "2026-10-13"
+    },
+    {
+      "id": "2610.16587",
+      "title": "Code-Interactive Visual Reasoning for Financial Candlestick Understanding",
+      "published": "2026-10-12"
+    },
+    {
+      "id": "2610.17234",
+      "title": "IsoVRBench: Video Reward Modeling Without Human Feedback",
+      "published": "2026-10-12"
+    },
+    {
+      "id": "2610.13485",
+      "title": "Proactive Agentic Orchestration",
+      "published": "2026-10-09"
+    },
+    {
+      "id": "2610.12419",
+      "title": "OneSearch-VL: Unified Multimodal Deep Research Agent for Image and Video",
+      "published": "2026-10-08"
+    },
+    {
+      "id": "2610.12707",
+      "title": "Unsupervised Multimodal Reward Modeling",
+      "published": "2026-10-08"
+    },
+    {
+      "id": "2610.09804",
+      "title": "BoT-GRPO: Efficient Process-Reward RL for Reasoning via Bag-of-Token Aggregation",
+      "published": "2026-10-07"
+    },
+    {
+      "id": "2610.05370",
+      "title": "EnGRICH: Enhancing Generative Reward Modeling with Critiques from Humans",
+      "published": "2026-10-04"
+    },
+    {
+      "id": "2610.02947",
+      "title": "FARM: Fundamental Agentic Reward Model For Multi-task Wireless Network Optimization",
+      "published": "2026-10-02"
+    },
+    {
+      "id": "2609.39220",
+      "title": "Learning Process Rewards via Reasoning State Propagation",
+      "published": "2026-09-30"
+    },
+    {
+      "id": "2609.36641",
+      "title": "Inducing Process Supervision from Outcome-Only Reinforcement Learning",
+      "published": "2026-09-29"
+    },
+    {
+      "id": "2609.37190",
+      "title": "HaPRL: Human-Anchored Process Reinforcement Learning for Visual Search Agent",
+      "published": "2026-09-29"
+    },
+    {
+      "id": "2609.37372",
+      "title": "Think Before You Score: Thinking Reward Model for Visual Generation",
+      "published": "2026-09-29"
+    },
+    {
+      "id": "2609.34660",
+      "title": "Rewarding Novel Deductions: Solver-guided Process Supervision for Logical Reasoning",
+      "published": "2026-09-28"
+    },
+    {
+      "id": "2609.34296",
+      "title": "Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents",
+      "published": "2026-09-28"
+    },
+    {
+      "id": "2609.34587",
+      "title": "Reinforcement Learning from Intermediate Renders for Image-to-Code Generation",
+      "published": "2026-09-28"
+    },
+    {
+      "id": "2609.36245",
+      "title": "CoRe: Co-Evolving Reward Models for Mitigating Latent Reward Hacking in Video Diffusion Models",
+      "published": "2026-09-28"
+    },
+    {
+      "id": "2609.34345",
+      "title": "CRISP: Cultural Reward Modeling for Implicit Situated Propriety",
+      "published": "2026-09-28"
+    },
+    {
+      "id": "2609.35109",
+      "title": "Using Context Is Not Enough: Test-Time Training for Personalized Reward Modeling",
+      "published": "2026-09-28"
+    },
+    {
+      "id": "2609.33221",
+      "title": "RMB: Reward Model Boosting Mitigates Reward Hacking",
+      "published": "2026-09-27"
+    },
+    {
+      "id": "2609.33989",
+      "title": "RewardExplainer: Learning Reward Model Explanations from Counterfactual Preference Feedback",
+      "published": "2026-09-27"
+    },
+    {
+      "id": "2609.33803",
+      "title": "Diffusion Reward Models",
+      "published": "2026-09-27"
+    },
+    {
+      "id": "2609.32631",
+      "title": "SWE-MILE: Asynchronous Potential-Induced Milestone Credit Assignment for Long-Horizon Software Engineering Agents",
+      "published": "2026-09-26"
+    },
+    {
+      "id": "2609.32720",
+      "title": "BiasReducer: Adaptive Bias Mitigation for Reward Models",
+      "published": "2026-09-26"
+    },
+    {
+      "id": "2609.26399",
+      "title": "Combining Hierarchical Cognitive Process with Process Supervision for Interpretable Scene Safety Understanding",
+      "published": "2026-09-22"
+    },
+    {
+      "id": "2609.24175",
+      "title": "FinRankGRPO: Optimizing LLMs for Listwise Financial Asset Ranking via Group Relative Policy Optimization",
+      "published": "2026-09-21"
+    },
+    {
+      "id": "2609.22746",
+      "title": "ProcessLight: Process Supervision for Large Language Model Based Traffic Signal Control",
+      "published": "2026-09-19"
+    },
+    {
+      "id": "2609.22947",
+      "title": "RewardVerse: Rubric-Guided Policy Optimization for Video Reward Modeling",
+      "published": "2026-09-19"
+    },
+    {
+      "id": "2609.21231",
+      "title": "Beyond Reference-Based Evaluation: Reward Models for Meta-Evaluation of Grammatical Error Correction",
+      "published": "2026-09-18"
+    },
+    {
+      "id": "2609.22347",
+      "title": "Verification Reward Model for Reinforcement Learning in Chip Design Verification",
+      "published": "2026-09-17"
+    },
+    {
+      "id": "2609.20106",
+      "title": "AnyviewMeter: Adapting Robotic Reward Models with Camera Geometry and Multi-View Attention",
+      "published": "2026-09-17"
+    },
+    {
+      "id": "2609.18852",
+      "title": "EviGen: Predictive Evidence Scaffolding for Verifiable Clinical Rationale Generation",
+      "published": "2026-09-16"
+    },
+    {
+      "id": "2609.16076",
+      "title": "The Imitation Game: When LLMs Learn to Reason Like Programs via Code-Centric Reasoning Data Synthesis",
+      "published": "2026-09-13"
+    },
+    {
+      "id": "2609.11176",
+      "title": "Debate-to-Skill: Capability-Bound Process Supervision for Industrial Query-to-Agent Annotation",
+      "published": "2026-09-10"
+    },
+    {
+      "id": "2609.09928",
+      "title": "Structural Process Supervision for Latent Chain-of-Thought Reasoning",
+      "published": "2026-09-09"
+    },
+    {
+      "id": "2609.05910",
+      "title": "UniRRM: Unified Reasoning Reward Models Across Languages and Evaluation Paradigms",
+      "published": "2026-09-05"
+    },
+    {
+      "id": "2609.05028",
+      "title": "Compositional Reward Models for Conditional Medical Image Generation",
+      "published": "2026-09-04"
+    },
+    {
+      "id": "2609.03952",
+      "title": "WorldReward: Reward Modeling for Camera-Conditioned World Models",
+      "published": "2026-09-03"
+    },
+    {
+      "id": "2609.00833",
+      "title": "Dense Process Supervision for Search Agents via Fact Utility Estimation",
+      "published": "2026-09-01"
+    },
+    {
+      "id": "2609.00699",
+      "title": "Patterning in Practice: Debiasing Reward Models with Susceptibilities",
+      "published": "2026-09-01"
+    },
+    {
+      "id": "2608.30461",
+      "title": "From Final Artifacts to Trajectories: Retrospective Process Supervision for Evidence-Grounded Long-Form Generation",
+      "published": "2026-08-31"
+    },
+    {
+      "id": "2608.31077",
+      "title": "Reconciling Process Supervision with Outcome-Based Credit in Agentic Policy Optimization",
+      "published": "2026-08-31"
+    },
+    {
+      "id": "2608.30841",
+      "title": "HSRM: Hidden-State Reward Models for Test-Time Verification",
+      "published": "2026-08-31"
+    },
+    {
+      "id": "2608.30051",
+      "title": "Mitigating Over-Optimization in PRM-Guided Search in Mathematical Reasoning by Optimizing the Guide",
+      "published": "2026-08-30"
+    },
+    {
+      "id": "2608.26956",
+      "title": "RubricRM: Generative Reward Modeling via Dynamic Rubrics for Image Generation and Editing",
+      "published": "2026-08-27"
+    },
+    {
+      "id": "2608.25139",
+      "title": "Path Abstraction for Markov Reward Models",
+      "published": "2026-08-25"
+    },
+    {
+      "id": "2608.23632",
+      "title": "Function-Level Execution Feedback for Code Preference Optimization",
+      "published": "2026-08-23"
+    },
+    {
+      "id": "2608.14107",
+      "title": "Retrieval Grounding Latent Reasoning for Dense Retrieval",
+      "published": "2026-08-14"
+    },
+    {
+      "id": "2608.12220",
+      "title": "SCOUT: Unlocking Enhanced Spatial Reasoning via Structured Chain-of-Thought and Multi-Objective Process Reward",
+      "published": "2026-08-12"
+    },
+    {
+      "id": "2608.07931",
+      "title": "REIN: Bridging the Gap between Reasoning and Reliability via Reflection and Abstention Alignment",
+      "published": "2026-08-08"
+    },
+    {
+      "id": "2608.08326",
+      "title": "StructReward: Efficient Structured Process Rewards for Self-Correcting Multimodal Reasoning",
+      "published": "2026-08-08"
+    },
+    {
+      "id": "2608.08219",
+      "title": "VTO: Visual Tool Orchestration for Video Anomaly Detection",
+      "published": "2026-08-08"
+    },
+    {
+      "id": "2608.06310",
+      "title": "RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction",
+      "published": "2026-08-06"
+    },
+    {
+      "id": "2608.02951",
+      "title": "SP3O: Reinforcement Learning from Segment Preferences without Reward Modeling",
+      "published": "2026-08-03"
+    },
+    {
+      "id": "2608.01556",
+      "title": "Rethinking Personalized Reward Modeling for LLMs under Preference Heterogeneity via Group-Debiased Federated Learning",
+      "published": "2026-08-03"
+    },
+    {
+      "id": "2607.28990",
+      "title": "Scaling Scientific Discovery Environments for Turn-Level Agentic RL",
+      "published": "2026-07-31"
+    }
+  ]
+}

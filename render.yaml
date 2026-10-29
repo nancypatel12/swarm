@@ -1,0 +1,26 @@
+# Swarm's API on Render's free web plan, built from backend/Dockerfile. Values marked sync: false are entered in
+# Render's dashboard when the Blueprint is created, so keys never live in the repo.
+services:
+  - type: web
+    name: swarm-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: NEBIUS_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: NEMOTRON_SUPER
+        value: nvidia/nemotron-3-super-120b-a12b
+      - key: NEMOTRON_ULTRA
+        value: nvidia/Nemotron-3-Ultra-550b-a55b
+      - key: NEMOTRON_NANO
+        value: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+      - key: SWARM_TRUST_PROXY
+        value: "1"
+      - key: FRONTEND_ORIGINS
+        sync: false

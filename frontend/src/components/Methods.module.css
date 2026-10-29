@@ -1,0 +1,138 @@
+.methods {
+  margin: 128px 0 0;
+}
+
+.heading {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.lead {
+  margin: 12px 0 0;
+}
+
+.lead a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.lead a:hover {
+  color: var(--ink);
+}
+
+.protocol {
+  margin: 56px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each step on one row: number, name, method, and the measured spec at the right. */
+.protocol li {
+  display: grid;
+  grid-template-columns: 36px 80px 1fr 136px;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.number {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.step {
+  font-weight: 600;
+}
+
+.spec {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.9;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.subheading {
+  margin: 64px 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Formal definitions, set like an appendix: soft block, system monospace. */
+.math {
+  margin: 0;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: var(--soft);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.9;
+  overflow-x: auto;
+}
+
+.caption {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.sheet {
+  width: 100%;
+  margin: 64px 0 0;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.sheet caption {
+  padding-bottom: 12px;
+  text-align: left;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sheet th,
+.sheet td {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.sheet th {
+  width: 36%;
+  padding-right: 16px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+@media (max-width: 560px) {
+  .protocol li {
+    grid-template-columns: 32px 1fr;
+    gap: 4px 12px;
+  }
+
+  .how,
+  .spec {
+    grid-column: 2;
+  }
+
+  .spec {
+    text-align: left;
+  }
+
+  .sheet th,
+  .sheet td {
+    display: block;
+    width: auto;
+  }
+
+  .sheet td {
+    padding-top: 0;
+    border: 0;
+  }
+}
